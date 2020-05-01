@@ -1,0 +1,18 @@
+.card-container-table{
+  width: 100%;
+  padding: 0px;
+  text-align: right
+}
+
+.card-container-table>.card-input{
+  display: inline;
+  padding: 20px 20px 0px 20px;
+}
+.card-container-table>.card-input>input{
+  width: 300px;
+  margin-left: 10px;
+}
+
+td{
+  font-size: 22px;
+}

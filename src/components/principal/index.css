@@ -1,0 +1,136 @@
+/* CSS - Global */
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+}
+
+
+:root{
+	--color-white:#F8F1DA;
+	--color-dark-cyan:#A1C5A2;
+	--color-cyan-blue:#79B4B9;
+	--color-blue:#198D93;
+	--color-gray:#2F3343;
+	--color-pink:#F54337;
+	--not-override-table-size:1500px;
+}
+
+.body-text{
+	color:var(--color-gray);
+}
+
+.body-container,body{
+	background: url('../../../public/background.jpg') no-repeat top center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+	background-size:cover; 
+
+}
+
+@media(max-width: 1500px){
+	/*Adapta tamanho para qualquer tela de computador.
+	Deve ser mudado se a tabela for mudada.
+	As tabelas devem possuir um tamanho padrão.*/
+	.body-container{
+		width: var(--not-override-table-size);
+	}
+}
+
+.header{
+	margin-top: 0px;
+	padding: 15px 15px 10px 15px;
+	background-color: var(--color-cyan-blue);
+	font-size: 1.5em;
+}
+
+a{
+	color: inherit; /* blue colors for links too */
+  text-decoration: inherit;
+}
+
+.header>a{
+	display: inline;
+	padding-right: 40px;
+}
+
+@media(max-width: 650px){
+	.sub-header>ul>li{
+		display: block;
+		padding-bottom: 15px;
+}
+}
+
+.separator{
+	margin:0px;
+	color:var(--color-white);
+}
+.logo{
+	width: 80px;
+	float:left;
+}
+h3{
+	/*Essa margem não pode ser mudada, se não a figura não fica legal*/
+	color:var(--color-gray);
+	margin-top: 30px;
+}
+*{
+  font-family: 'Raleway';
+	margin: 0px;
+}
+
+table{
+	text-align: center;
+}
+
+.link-table{
+	color: var(--color-gray);
+}
+
+td{
+	color:var(--color-gray);
+	font-size: 30px;
+	padding: 20px 60px 20px 60px;
+	border-bottom-style: solid;
+}
+
+
+/* CSS - Components*/
+
+.card-input{
+	display: grid;
+	margin-bottom: 20px;
+}
+
+.card-container{
+	display: grid;
+	width: 300px;
+	margin: 5% auto;
+	border-radius: 20px;
+	background-color: var(--color-cyan-blue);
+	padding: 20px;
+}
+.card-container > label,
+.card-container > p,
+.card-container > a{
+	color:var(--color-gray);
+}
+.card-input >label{
+	color:var(--color-gray);
+}
+.card-input >input{
+	
+}
+
+.button-link{
+	width: 100%;
+	margin-top: 40px;
+}
+
+.body-container > div{
+
+}
