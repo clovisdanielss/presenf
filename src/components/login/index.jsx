@@ -17,7 +17,7 @@ class Login extends Component {
           <label htmlFor='password'>Senha:</label>
           <input id='password' />
         </div>
-        <Link className='body-text big-body-text' to='/pacientes'>
+        <Link className='body-text big-body-text' to='/paciente'>
           <button type='input'className='button-link'>
               Entrar
           </button>

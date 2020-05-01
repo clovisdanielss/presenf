@@ -29,10 +29,10 @@ class CustomRouter extends Component {
     const data = this.props
     return (
       <Switch>
-        <Route path='/pacientes/:id'>
+        <Route path='/paciente/:id'>
           <Paciente data={this.state.data} />
         </Route>
-        <Route path='/pacientes'>
+        <Route path='/paciente'>
           <Pacientes loadData={this.loadData} />
         </Route>
         <Route path='/'>

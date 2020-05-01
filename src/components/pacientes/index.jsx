@@ -64,7 +64,13 @@ class Pacientes extends Component{
 
 	componentDidMount(){
 		setTimeout(()=>{
-			this.setState({pacientes:pacientes_data});
+			var xhr = new XMLHttpRequest()
+			xhr.addEventListener('load', () => {
+				var pacientes = JSON.parse(xhr.responseText)
+				this.setState({pacientes:pacientes})
+			})
+			xhr.open('GET',process.env.REACT_APP_URL+'paciente')
+			xhr.send()
 		},5)	
 	}
 
@@ -100,7 +106,7 @@ class Pacientes extends Component{
 							<td>{paciente["leito"]}</td>
 							<td>{paciente["diasLeito"]}</td>
 							<td>{paciente["diasHospital"]}</td>
-							<td><Link className="link-table" to={()=>{return "/pacientes/"+paciente["id"]}}
+							<td><Link className="link-table" to={()=>{return "/paciente/"+paciente["id"]}}
 							 onClick={()=>{console.log("Debug!");loadData(paciente)}}>Selecionar</Link></td>
 						</tr>
 						);
