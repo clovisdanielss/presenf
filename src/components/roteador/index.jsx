@@ -7,6 +7,7 @@ import Login from '../login'
 import Pacientes from '../pacientes'
 import Paciente from '../paciente'
 import Historico from '../historico'
+import Prescricao from '../prescricao'
 import React, { Component } from 'react'
 
 class CustomRouter extends Component {
@@ -38,7 +39,10 @@ class CustomRouter extends Component {
     return (
       <Switch>
         <Route path='/paciente/:id/prescricao/historico'>
-          <Historico prescricao={this.loadPrescricao} paciente={this.state.paciente}/>
+          <Historico loadData={this.loadPrescricao} paciente={this.state.paciente}/>
+        </Route>
+        <Route path='/paciente/:id/prescricao/:id'>
+          <Prescricao prescricao={this.state.prescricao} paciente={this.state.paciente}/>  
         </Route>
         <Route path='/paciente/:id'>
           <Paciente paciente={this.state.paciente} />

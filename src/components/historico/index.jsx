@@ -36,7 +36,6 @@ class Historico extends Component {
       xhr.addEventListener('load', () => {
         var historico = JSON.parse(xhr.responseText)
         this.setState({ historico: historico })
-        console.log(historico)
       })
       var url = process.env.REACT_APP_URL + 'paciente/' +
         this.props.paciente.id.toString() + '/prescricao'
@@ -55,6 +54,8 @@ class Historico extends Component {
     const loadData = this.props.loadData
     return (
       <div className='card-container card-container-table'>
+        <h2>Histórico de Prescrição</h2>
+        <hr/>
         <div>
           <div className='card-input img-input'>
             <Link to={() => { if (this.props.paciente) return '/paciente/' + this.props.paciente.id }}>

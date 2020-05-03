@@ -15,7 +15,15 @@
   margin: 0px 5%;
 }
 
+.card-container-paciente>h2{
+  text-align: center;
+  padding: 20px;
+}
 
+.card-container-paciente>hr{
+  margin-bottom: 20px;
+  padding:0px;
+}
 
 .float-right{
   float: right;

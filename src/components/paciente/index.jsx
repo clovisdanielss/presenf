@@ -13,6 +13,8 @@ class Paciente extends Component {
   render () {
     return (
       <div className='card-container card-container-paciente'>
+        <h2>Informação do Paciente</h2>
+        <hr/>
         <div className='card-input'>
           <label htmlFor='nomePaciente'>Paciente: </label>
           <input id='nomePaciente' value={this.props.paciente.nome} readOnly />

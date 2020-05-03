@@ -41,6 +41,8 @@ class Pacientes extends Component{
 		const loadData = this.props.loadData
 		return (
 			<div className="card-container card-container-table">
+				<h2>Pacientes</h2>
+				<hr/>
 				<div className="card-input">
 					<label htmlFor="search-bar">Busca:</label>
 					<input id="search-bar" type="input" onChange={this.tableSearchUpdate}/>

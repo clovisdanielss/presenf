@@ -1,0 +1,22 @@
+.card-container-prescricao{
+  width: 600px;
+}
+
+.card-container-prescricao>.two-column{
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.two-column>.card-input>input{
+  width: 250px;
+}
+.card-container-prescricao > h2{
+  text-align: center;
+  padding: 20px;
+}
+
+.card-container-prescricao > hr{
+  margin-bottom: 20px;
+  padding:0px;
+}
