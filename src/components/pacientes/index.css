@@ -5,7 +5,7 @@
 }
 
 .card-container-table>.card-input{
-  display: inline;
+  display: block;
   padding: 20px 20px 0px 20px;
 }
 .card-container-table>.card-input>input{

@@ -1,45 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import '../principal/index.css'
 import './index.css'
 import paciente from '../../../public/paciente.png';
 import gestao from '../../../public/gestao.png'
-
-var pacientes_data=[
-	{
-		'id': 1,
-		'prontuario':19025,
-		'nome':"Alberto Sabino",
-		'leito':"302",
-		'diasHospital':30,
-		'diasLeito':10,
-	},
-	{
-		'id':2,
-		'prontuario':33000,
-		'nome':"Everardo Sabino",
-		'leito':"502",
-		'diasHospital':100,
-		'diasLeito':25,
-	},
-	{
-		'id':3,
-		'prontuario':76665,
-		'nome':"Alberto Queiroz",
-		'leito':"503",
-		'diasHospital':300,
-		'diasLeito':100,
-	},
-	{
-		'id':4,
-		'prontuario':18452,
-		'nome':"José Amancio",
-		'leito':"303",
-		'diasHospital':10,
-		'diasLeito':10,
-	},
-]
-
 
 
 class Pacientes extends Component{
@@ -107,7 +70,7 @@ class Pacientes extends Component{
 							<td>{paciente["diasLeito"]}</td>
 							<td>{paciente["diasHospital"]}</td>
 							<td><Link className="link-table" to={()=>{return "/paciente/"+paciente["id"]}}
-							 onClick={()=>{console.log("Debug!");loadData(paciente)}}>Selecionar</Link></td>
+							 onClick={()=>{loadData(paciente)}}>Selecionar</Link></td>
 						</tr>
 						);
 					}})}

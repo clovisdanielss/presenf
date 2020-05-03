@@ -1,0 +1,17 @@
+.img-input{
+  text-align: left;
+  float: left;
+}
+
+.img-input>a>label{
+  vertical-align: super;
+  margin-left: 10px;
+}
+.card-container-table>div>.card-input{
+  display: block;
+  padding: 20px 20px 0px 20px;
+}
+.card-container-table>div>.card-input>input{
+  width: 300px;
+  margin-left: 10px;
+}

@@ -119,7 +119,7 @@ td{
 .card-container > a{
 	color:var(--color-gray);
 }
-.card-input >label{
+label{
 	color:var(--color-gray);
 }
 .card-input >input{

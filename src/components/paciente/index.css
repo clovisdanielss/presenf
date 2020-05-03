@@ -1,0 +1,29 @@
+.card-container-paciente{
+  width: 400px;
+}
+
+.card-container-paciente > div > div > a > img{
+  width: 100px;
+}
+
+.card-container-paciente >.flex-icons{
+  display: flex;
+}
+
+.card-container-paciente >div> div{
+  text-align: center;
+  margin: 0px 5%;
+}
+
+
+
+.float-right{
+  float: right;
+}
+
+#prescrever,#historico{
+  display: inline-block;
+}
+#prescrever>img{
+  display: block;
+}

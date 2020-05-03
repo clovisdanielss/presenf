@@ -6,22 +6,30 @@ import { Switch, Route } from 'react-router-dom'
 import Login from '../login'
 import Pacientes from '../pacientes'
 import Paciente from '../paciente'
+import Historico from '../historico'
 import React, { Component } from 'react'
 
 class CustomRouter extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: null,
-      enfermeiroId: null,
-      enfermeiroCoren: null
+      enfermeiro: null,
+      paciente: null,
+      prescricao: null
     }
-    this.loadData = this.loadData.bind(this)
+    this.loadPaciente = this.loadPaciente.bind(this)
+    this.loadPrescricao = this.loadPrescricao.bind(this)
   }
 
-  loadData (data) {
+  loadPaciente (paciente) {
     this.setState({
-      data: data
+      paciente: paciente
+    })
+  }
+
+  loadPrescricao (prescricao) {
+    this.setState({
+      prescricao: prescricao
     })
   }
 
@@ -29,11 +37,14 @@ class CustomRouter extends Component {
     const data = this.props
     return (
       <Switch>
+        <Route path='/paciente/:id/prescricao/historico'>
+          <Historico prescricao={this.loadPrescricao} paciente={this.state.paciente}/>
+        </Route>
         <Route path='/paciente/:id'>
-          <Paciente data={this.state.data} />
+          <Paciente paciente={this.state.paciente} />
         </Route>
         <Route path='/paciente'>
-          <Pacientes loadData={this.loadData} />
+          <Pacientes loadData={this.loadPaciente} />
         </Route>
         <Route path='/'>
           <Login parent={this} />
