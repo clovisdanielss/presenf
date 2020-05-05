@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 import './index.css'
 import voltarIcon from '../../../public/voltar.svg'
 import impressoraIcon from '../../../public/impressora.svg'
+import ModalComponent from '../modal-component'
 
 function formmatDate (dateString) {
   var date = new Date(dateString)
   var day = date.getDate().toString()
-  day = (day.length == 1) ? '0' + day : day
+  day = (day.length === 1) ? '0' + day : day
   var mon = (date.getMonth() + 1).toString() // +1 pois no getMonth Janeiro começa com zero.
-  mon = (mon.length == 1) ? '0' + mon : mon
+  mon = (mon.length === 1) ? '0' + mon : mon
   var year = date.getFullYear()
   return day + '/' + mon + '/' + year
 }
@@ -19,6 +21,44 @@ function formmatHours (dateString) {
   var hour = date.getHours()
   var min = date.getMinutes()
   return hour.toString() + ':' + min.toString()
+}
+
+const Diagnostico = (props) => {
+  var diagnostico = props.diagnostico
+  var index = props.index
+  var key = props.reactKey
+  if (!index) {
+    index = key
+  }
+  return (
+    <div key={key} data-index={index} className='generated-by-array'>
+      {diagnostico.index === undefined ? null : <a className='on-remove' onClick={props.onRemoveDiagnostico}>Remover Diagnóstico</a>}
+      <div className='card-input'>
+        <label htmlFor={'diagnostico' + index.toString()}>Diagnóstico: </label>
+        <input onClick={props.onOpenModal} id={'diagnostico' + index.toString()} value={diagnostico.nome} readOnly />
+      </div>
+      <div className='two-column'>
+        <div className='card-input'>
+          <label htmlFor={'resultado' + index.toString()}>Resultado: </label>
+          <input onClick={props.onOpenModal} id={'resultado' + index.toString()} value={diagnostico.resultado} readOnly />
+        </div>
+        <div className='card-input'>
+          <label htmlFor={'intervencao' + index.toString()}>Intervenção: </label>
+          <input onClick={props.onOpenModal} id={'intervencao' + index.toString()} value={diagnostico.intervencao} readOnly />
+        </div>
+      </div>
+      <div className='two-column'>
+        <div className='card-input'>
+          <label htmlFor={'aprazamento' + index.toString()}>Aprazamento: </label>
+          <input id={'aprazamento' + index.toString()} value={diagnostico.aprazamento} readOnly />
+        </div>
+        <div className='card-input'>
+          <label htmlFor={'avaliacao' + index.toString()}>Avaliação: </label>
+          <input id={'avaliacao' + index.toString()} value={diagnostico.avaliacao} readOnly />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const PrescricaoReadOnly = (props) => {
@@ -50,34 +90,11 @@ const PrescricaoReadOnly = (props) => {
         <label htmlFor='nomePaciente'>Paciente: </label>
         <input id='nomePaciente' value={props.paciente.nome} readOnly />
       </div>
-      {props.state.diagnosticos.map((diagnostico, index) => {
-        return [
-          <div key={(index) * 3} className='card-input'>
-            <label htmlFor={'nomeDiagnostico' + index.toString()}>Diagnóstico: </label>
-            <input id={'nomeDiagnostico' + index.toString()} value={diagnostico.nome} readOnly />
-          </div>,
-          <div key={1 + (index) * 3} className='two-column'>
-            <div className='card-input'>
-              <label htmlFor={'resultado' + index.toString()}>Resultado: </label>
-              <input id={'resultado' + index.toString()} value={diagnostico.resultado} readOnly />
-            </div>
-            <div className='card-input'>
-              <label htmlFor={'intervencao' + index.toString()}>Intervenção: </label>
-              <input id={'intervencao' + index.toString()} value={diagnostico.intervencao} readOnly />
-            </div>
-          </div>,
-          <div key={2 + (index) * 3} className='two-column'>
-            <div className='card-input'>
-              <label htmlFor={'aprazamento' + index.toString()}>Aprazamento: </label>
-              <input id={'aprazamento' + index.toString()} value={diagnostico.aprazamento} readOnly />
-            </div>
-            <div className='card-input'>
-              <label htmlFor={'avaliacao' + index.toString()}>Avaliação: </label>
-              <input id={'avaliacao' + index.toString()} value={diagnostico.avaliacao} readOnly />
-            </div>
-          </div>
-        ]
-      })}
+      {
+        props.state.diagnosticos.map((diagnostico, key) => {
+          return (<Diagnostico state={props.state} key={key} reactKey={key} diagnostico={diagnostico} />)
+        })
+      }
       <div className='card-input'>
         <label htmlFor='observacao'>Observação: </label>
         <input id='observacao' value={props.prescricao.observacao} readOnly />
@@ -101,7 +118,41 @@ const PrescricaoReadOnly = (props) => {
 }
 
 const PrescricaoWrite = (props) => {
-
+  return (
+    <form className='card-container card-container-prescricao'>
+      <h2>Criar Prescricao</h2>
+      <hr />
+      <div className='two-column'>
+        <div className='card-input'>
+          <label htmlFor='nomeEnfermeiro'>Enfermeiro: </label>
+          <input id='nomeEnfermeiro' value={props.state.enfermeiro.nome} readOnly />
+        </div>
+        <div className='card-input'>
+          <label htmlFor='nomeEnfermeiro'>Coren: </label>
+          <input id='nomeEnfermeiro' value={props.state.enfermeiro.coren} readOnly />
+        </div>
+      </div>
+      <div className='card-input'>
+        <label htmlFor='nomePaciente'>Paciente: </label>
+        <input id='nomePaciente' value={props.paciente.nome} readOnly />
+      </div>
+      {
+        props.state.diagnosticos.map((item, key) => {
+          var index = item.index
+          var diagnostico = item
+          return (
+            <Diagnostico
+              state={props.state} key={key} reactKey={key} index={index}
+              diagnostico={diagnostico}
+              onRemoveDiagnostico={props.onRemoveDiagnostico}
+              onOpenModal={props.onOpenModal}
+            />
+          )
+        })
+      }
+      <a onClick={props.onDiagnosticoKey}>Criar novo diagnóstico</a>
+    </form>
+  )
 }
 
 class Prescricao extends Component {
@@ -109,27 +160,117 @@ class Prescricao extends Component {
     super(props)
     this.state = {
       diagnosticos: [],
+      diagnosticosIndexes: 0,
       enfermeiro: null,
-      prescricaoMaisRecente: null
+      prescricaoMaisRecente: null,
+      modalOpen: false,
+      query: ''
     }
 
+    this.onRemoveDiagnostico = this.onRemoveDiagnostico.bind(this)
+    this.onDiagnosticoKey = this.onDiagnosticoKey.bind(this)
     this.loadPrescricaoRecente = this.loadPrescricaoRecente.bind(this)
     this.loadDiagnosticos = this.loadDiagnosticos.bind(this)
     this.loadEnfermeiro = this.loadEnfermeiro.bind(this)
     this.loadLoggedEnfermeiro = this.loadLoggedEnfermeiro.bind(this)
+    this.onOpenModal = this.onOpenModal.bind(this)
+    this.onCloseModal = this.onCloseModal.bind(this)
+    this.onSelectValue = this.onSelectValue.bind(this)
+  }
+
+  onSelectValue (value, index, param) {
+    console.log(index, value)
+    // Tenho que verificar se é um resultado ou diag msm
+    // tenho também que adicionar novos diagnosticos
+    for (var i = 0; i < this.state.diagnosticos.length; i++) {
+      if (this.state.diagnosticos[i].index === parseInt(index)) {
+        switch (param) {
+          case 'Diagnóstico':
+            this.state.diagnosticos[i].nome = value
+            break
+          case 'Resultado':
+            this.state.diagnosticos[i].resultado = value
+            break
+          case 'Intervenção':
+            this.state.diagnosticos[i].intervencao = value
+            break
+          default:
+            console.log('Algum erro ocorreu')
+            break
+        }
+      }
+    }
+  }
+
+  onOpenModal (e) {
+    this.setState({
+      query: e.target.id.toString(),
+      modalOpen: true
+    })
+    this.forceUpdate()
+  }
+
+  onCloseModal (e) {
+    this.setState({
+      modalOpen: false,
+      query: ''
+    })
+    this.forceUpdate()
+  }
+
+  onDiagnosticoKey (e) {
+    this.state.diagnosticos.push({
+      index: this.state.diagnosticosIndexes,
+      nome: '',
+      resultado: '',
+      aprazamento: '',
+      avaliacao: '',
+      intervencao: ''
+    })
+    this.state.diagnosticosIndexes++
+
+    this.forceUpdate()
+  }
+
+  onRemoveDiagnostico (e) {
+    var index = e.target.parentNode.getAttribute('data-index')
+    var diagnosticos = []
+    for (var i = 0; i < this.state.diagnosticos.length; i++) {
+      if (this.state.diagnosticos[i].index != index) {
+        diagnosticos.push(this.state.diagnosticos[i])
+      }
+    }
+    console.log('Saída', diagnosticos)
+    this.setState({ diagnosticos: diagnosticos })
+    this.forceUpdate()
   }
 
   // Carrega diagnóstico e enfermeiro referente a prescrição
 
   loadDiagnosticos () {
     setTimeout(() => {
+      var prescricao = this.props.prescricao
       var diagReq = new XMLHttpRequest()
       diagReq.addEventListener('load', () => {
         var diagnosticos = JSON.parse(diagReq.responseText)
-        this.setState({ diagnosticos: diagnosticos })
+        if (this.props.readOnly === false) {
+          for (var i = 0; i < diagnosticos.length; i++) {
+            diagnosticos[i].index = i
+          }
+        }
+        this.setState({
+          diagnosticos: diagnosticos,
+          diagnosticosIndexes: diagnosticos.length
+        })
       })
+      if (!prescricao && this.state.prescricaoMaisRecente) {
+        prescricao = this.state.prescricaoMaisRecente
+      } else if (!prescricao) {
+        console.log('Não existem prescrições anteriores para este paciente!')
+        return 0
+      }
       diagReq.open('GET', process.env.REACT_APP_URL + 'paciente/' +
-       this.props.paciente.id + '/prescricao/' + this.props.prescricao.id)
+       this.props.paciente.id + '/prescricao/' + prescricao.id)
       diagReq.send()
     })
   }
@@ -163,6 +304,7 @@ class Prescricao extends Component {
       prescricoesReq.addEventListener('load', () => {
         var prescricoes = JSON.parse(prescricoesReq.responseText)
         this.setState({ prescricaoMaisRecente: prescricoes[0] })
+        this.loadDiagnosticos()
       })
       prescricoesReq.open('GET', process.env.REACT_APP_URL + 'paciente/' +
         this.props.paciente.id + '/prescricao')
@@ -180,13 +322,32 @@ class Prescricao extends Component {
     }
   }
 
+  componentDidUpdate () {
+    console.log(this.state)
+  }
+
   render () {
     if (this.state.enfermeiro && this.props.readOnly) {
       return (
         <PrescricaoReadOnly state={this.state} paciente={this.props.paciente} prescricao={this.props.prescricao} />
       )
     } else if (this.state.enfermeiro && !this.props.readOnly) {
-      return (<div />)
+      return [
+        <PrescricaoWrite
+          key={0}
+          state={this.state} paciente={this.props.paciente}
+          onDiagnosticoKey={this.onDiagnosticoKey}
+          onRemoveDiagnostico={this.onRemoveDiagnostico}
+          onOpenModal={this.onOpenModal}
+        />,
+        <ModalComponent
+          key={1}
+          onCloseModal={this.onCloseModal}
+          modalOpen={this.state.modalOpen}
+          query={this.state.query}
+          onSelectValue={this.onSelectValue}
+        />
+      ]
     } else {
       return (
         <div className='card-container'>

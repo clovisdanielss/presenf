@@ -1,7 +1,7 @@
 .card-container-table{
   width: 100%;
   padding: 0px;
-  text-align: right
+  text-align: right;
 }
 
 .card-container-table>h2{
@@ -22,6 +22,3 @@
   margin-left: 10px;
 }
 
-td{
-  font-size: 22px;
-}

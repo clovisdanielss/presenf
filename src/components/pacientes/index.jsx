@@ -1,86 +1,111 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './index.css'
-import paciente from '../../../public/paciente.png';
+import paciente from '../../../public/paciente.png'
 import gestao from '../../../public/gestao.png'
 
+class Pacientes extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      search: '',
+      pacientes: []
+    }
+    this.onTableSearchUpdate = this.onTableSearchUpdate.bind(this)
+  }
 
-class Pacientes extends Component{
-	state = {
-		pacientes:[],
-	};
+  onTableSearchUpdate (event) {
+    this.setState({ search: event.target.value })
+    console.log(this.state)
+    this.forceUpdate()
+  }
 
-	constructor(props){
-		super(props);
-		this.state = {
-			search:"",
-			pacientes:[],
-		}
-		this.tableSearchUpdate = this.tableSearchUpdate.bind(this)
-	}
+  componentDidMount () {
+    setTimeout(() => {
+      var xhr = new XMLHttpRequest()
+      xhr.addEventListener('load', () => {
+        var pacientes = JSON.parse(xhr.responseText)
+        this.setState({ pacientes: pacientes })
+      })
+      xhr.open('GET', process.env.REACT_APP_URL + 'paciente')
+      xhr.send()
+    }, 5)
+  }
 
-	tableSearchUpdate(event){
-		this.setState({search:event.target.value});
-		console.log(this.state)
-		this.forceUpdate()
-	}
+  render () {
+    const loadData = this.props.loadData
+    return (
+      <div className='card-container card-container-table'>
+        <h2>Pacientes</h2>
+        <hr />
+        <div className='card-input'>
+          <label htmlFor='search-bar'>Busca:</label>
+          <input id='search-bar' type='input' onChange={this.onTableSearchUpdate} />
+        </div>
+        <hr />
+        <div className='wrapper'>
+          <table>
+            <thead>
+              <tr>
+                <th>Prontuário: </th>
+                <th>Nome: </th>
+                <th>Clínica: </th>
+                <th>Dias no leito: </th>
+                <th>Dias no hospital: </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.pacientes.map((paciente, index) => {
+                var search = new RegExp(this.state.search)
+                if (search.test(paciente.nome) ||
+						search.test(paciente.leito.toString())) {
+                  return (
+                    <tr key={index}>
+                      <td>
+                        <Link
+                          className='link-table' to={() => { return '/paciente/' + paciente.id }}
+                          onClick={() => { loadData(paciente) }}
+                        >
+                          {paciente.prontuario}
+                        </Link>
+                      </td>
+                      <td><Link
+                        className='link-table' to={() => { return '/paciente/' + paciente.id }}
+                        onClick={() => { loadData(paciente) }}
+                      >{paciente.nome}
+                      </Link>
+                      </td>
+                      <td><Link
+                        className='link-table' to={() => { return '/paciente/' + paciente.id }}
+                        onClick={() => { loadData(paciente) }}
+                      >{paciente.leito}
+                      </Link>
+                      </td>
+                      <td><Link
+                        className='link-table' to={() => { return '/paciente/' + paciente.id }}
+                        onClick={() => { loadData(paciente) }}
+                      >{paciente.diasLeito}
+                      </Link>
+                      </td>
+                      <td><Link
+                        className='link-table' to={() => { return '/paciente/' + paciente.id }}
+                        onClick={() => { loadData(paciente) }}
+                      >
+                        {paciente.diasHospital}
+                      </Link>
+                      </td>
 
-	componentDidMount(){
-		setTimeout(()=>{
-			var xhr = new XMLHttpRequest()
-			xhr.addEventListener('load', () => {
-				var pacientes = JSON.parse(xhr.responseText)
-				this.setState({pacientes:pacientes})
-			})
-			xhr.open('GET',process.env.REACT_APP_URL+'paciente')
-			xhr.send()
-		},5)	
-	}
+                    </tr>
 
-	render(){
-		const loadData = this.props.loadData
-		return (
-			<div className="card-container card-container-table">
-				<h2>Pacientes</h2>
-				<hr/>
-				<div className="card-input">
-					<label htmlFor="search-bar">Busca:</label>
-					<input id="search-bar" type="input" onChange={this.tableSearchUpdate}/>
-				</div>
-				<hr/>
-				<table>
-					<thead>
-					<tr>
-						<td>Prontuário: </td>
-						<td>Nome: </td>
-						<td>Clínica: </td>
-						<td>Dias no leito: </td>
-						<td>Dias no hospital: </td>
-						<td>Prescrição Enf.: </td>
-					</tr>
-					</thead>
-					<tbody>
-					{this.state.pacientes.map((paciente,index)=> {
-						var search = new RegExp(this.state.search)
-						if(search.test(paciente["nome"]) || 
-							search.test(paciente["leito"].toString())){
-						return(
-						<tr key = {index}>
-							<td>{paciente["prontuario"]}</td>
-							<td>{paciente["nome"]}</td>
-							<td>{paciente["leito"]}</td>
-							<td>{paciente["diasLeito"]}</td>
-							<td>{paciente["diasHospital"]}</td>
-							<td><Link className="link-table" to={()=>{return "/paciente/"+paciente["id"]}}
-							 onClick={()=>{loadData(paciente)}}>Selecionar</Link></td>
-						</tr>
-						);
-					}})}
-					</tbody>
-				</table>
-			</div>
-		);
-	}
+                  )
+                }
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default Pacientes;
+export default Pacientes

@@ -87,15 +87,38 @@ table{
 	text-align: center;
 }
 
-.link-table{
+.link-table,a{
 	color: var(--color-gray);
 }
 
-td{
+td,th{
+	position: sticky;
 	color:var(--color-gray);
 	font-size: 30px;
-	padding: 20px 60px 20px 60px;
+	padding: 1rem 2rem;
 	border-bottom-style: solid;
+	font-size: 22px;
+	min-width:100px;
+	max-width:300px;
+}
+
+.wrapper{
+
+	height: 300px;
+	position: relative;
+  overflow: auto;
+
+}
+
+hr{
+	clear: both;
+}
+
+table{
+	position: absolute;
+	text-align: center;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 
@@ -107,7 +130,6 @@ td{
 }
 
 .card-container{
-	display: grid;
 	width: 300px;
 	margin: 5% auto;
 	border-radius: 20px;

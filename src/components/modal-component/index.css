@@ -1,0 +1,14 @@
+.modal>.card-container>h2{
+  text-align: center;
+  padding: 20px;
+}
+
+.modal>.card-container{
+  padding-left: 10px;
+  border-radius: 0px;
+}
+
+.modal>.card-container-table>table{
+  margin-bottom: 10px;
+}
+

@@ -9,6 +9,10 @@
   justify-content: space-around;
 }
 
+.on-remove{
+  margin-bottom: 10px;
+}
+
 .prescricao-icons>div>a>img{
   width: 75px;
 }
@@ -17,10 +21,13 @@
   text-align: center;
 }
 
+
+.generated-by-array>.two-column,
 .card-container-prescricao>.two-column{
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
 
 .two-column>.card-input>input{

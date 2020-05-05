@@ -69,6 +69,7 @@ class Historico extends Component {
           </div>
         </div>
         <hr />
+        <div className='wrapper'>
         <table>
           <thead>
             <tr>
@@ -105,6 +106,7 @@ class Historico extends Component {
             })}
           </tbody>
         </table>
+        </div>
       </div>
     )
   }
