@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-modal'
 import './index.css'
 import { Link } from 'react-router'
-import voltarIcon from '../../../public/voltar.svg'
+import voltarIcon from '../../public/voltar.svg'
 
 Modal.setAppElement('#root')
 

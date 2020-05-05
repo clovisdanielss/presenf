@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import voltarIcon from '../../../public/voltar.svg'
+import voltarIcon from '../../public/voltar.svg'
 import './index.css'
 
 function formmatDate (dateString) {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './index.css'
-import paciente from '../../../public/paciente.png'
-import gestao from '../../../public/gestao.png'
+import paciente from '../../public/paciente.png'
+import gestao from '../../public/gestao.png'
 
 class Pacientes extends Component {
   constructor (props) {

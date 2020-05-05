@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './index.css'
 import { Link } from 'react-router-dom'
-import historicoIcon from '../../../public/historico.svg'
-import prescricaoIcon from '../../../public/prescricao.svg'
-import voltarIcon from '../../../public/voltar.svg'
+import historicoIcon from '../../public/historico.svg'
+import prescricaoIcon from '../../public/prescricao.svg'
+import voltarIcon from '../../public/voltar.svg'
 
 class Paciente extends Component {
   constructor (props) {

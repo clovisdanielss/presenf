@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
-import logo from '../../../public/logo.svg'
+import logo from '../../public/logo.svg'
 import CustomRouter from '../roteador'
 import {
   BrowserRouter as Router,

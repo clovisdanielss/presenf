@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 import './index.css'
-import voltarIcon from '../../../public/voltar.svg'
-import impressoraIcon from '../../../public/impressora.svg'
+import voltarIcon from '../../public/voltar.svg'
+import impressoraIcon from '../../public/impressora.svg'
 import ModalComponent from '../modal-component'
 
 function formmatDate (dateString) {
