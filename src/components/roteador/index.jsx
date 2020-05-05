@@ -39,10 +39,13 @@ class CustomRouter extends Component {
     return (
       <Switch>
         <Route path='/paciente/:id/prescricao/historico'>
-          <Historico loadData={this.loadPrescricao} paciente={this.state.paciente}/>
+          <Historico loadData={this.loadPrescricao} paciente={this.state.paciente} />
         </Route>
         <Route path='/paciente/:id/prescricao/:id'>
-          <Prescricao prescricao={this.state.prescricao} paciente={this.state.paciente}/>  
+          <Prescricao readOnly={true} prescricao={this.state.prescricao} paciente={this.state.paciente} />
+        </Route>
+        <Route path='/paciente/:id/prescricao'>
+          <Prescricao paciente={this.state.paciente} readOnly={false}/>
         </Route>
         <Route path='/paciente/:id'>
           <Paciente paciente={this.state.paciente} />

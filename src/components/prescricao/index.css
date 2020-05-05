@@ -2,6 +2,21 @@
   width: 600px;
 }
 
+
+.prescricao-icons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.prescricao-icons>div>a>img{
+  width: 75px;
+}
+
+.prescricao-icons>div>figcaption{
+  text-align: center;
+}
+
 .card-container-prescricao>.two-column{
   display: inline-flex;
   flex-direction: row;
