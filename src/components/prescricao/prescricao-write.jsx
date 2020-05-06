@@ -46,15 +46,15 @@ const PrescricaoWrite = (props) => {
       <div className='prescricao-icons'>
         <div>
           <figcaption htmlFor='voltar'>Voltar:</figcaption>
-          <Link to={'/paciente/' + props.paciente.id + '/prescricao/historico'}>
+          <Link to={'/paciente/' + props.paciente.id}>
             <img src={voltarIcon} />
           </Link>
         </div>
         <div>
           <figcaption htmlFor='salvar'>Salvar:</figcaption>
-          <a href='#' onClick={props.onSave}>
+          <Link to={'/paciente/' + props.paciente.id} onClick={props.onSave}>
             <img src={saveIcon} />
-          </a>
+          </Link>
         </div>
       </div>
     </form>

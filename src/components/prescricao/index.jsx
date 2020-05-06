@@ -49,9 +49,13 @@ class Prescricao extends Component {
       prescricao.avaliacoes.push(diagnostico.avaliacao)
     })
     var xhr = new XMLHttpRequest()
-    xhr.addEventListener('save', () => {
-      console.log(JSON.parse(xhr.responseText))
-    })
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4 && xhr.status === 201) {
+        alert('Prescrição salva com sucesso!')
+      } else if (xhr.readyState == 4) {
+        alert('Erro na prescrição!')
+      }
+    }
     xhr.open('POST', process.env.REACT_APP_URL + 'paciente/' +
        this.props.paciente.id + '/prescricao')
     xhr.setRequestHeader('Content-Type', 'application/json')
