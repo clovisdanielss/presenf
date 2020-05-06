@@ -104,7 +104,7 @@ td,th{
 
 .wrapper{
 
-	height: 300px;
+	height: 500px;
 	position: relative;
   overflow: auto;
 
@@ -121,7 +121,17 @@ table{
 	width: 100%;
 }
 
-
+select{
+	height: 52px;/*+12*/
+}
+input{
+	word-break: break-word;
+	height: 40px;
+}
+.voltar-pequeno{
+  width: 40px;
+  vertical-align: middle;
+}
 /* CSS - Components*/
 
 .card-input{

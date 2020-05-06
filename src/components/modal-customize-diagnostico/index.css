@@ -1,0 +1,12 @@
+.card-input-group{
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  margin: 15px 0px 30px;
+}
+.card-input-group>.card-input{
+  margin: 0px 15px;
+}
+.modal-button{
+  margin: 10px 20px;
+}

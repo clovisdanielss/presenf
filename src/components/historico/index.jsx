@@ -59,7 +59,7 @@ class Historico extends Component {
         <div>
           <div className='card-input img-input'>
             <Link to={() => { if (this.props.paciente) return '/paciente/' + this.props.paciente.id }}>
-              <img src={voltarIcon} width='30' />
+              <img src={voltarIcon} className='voltar-pequeno'/>
               <label>Voltar</label>
             </Link>
           </div>

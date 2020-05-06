@@ -27,12 +27,13 @@ const Diagnostico = (props) => {
   var diagnostico = props.diagnostico
   var index = props.index
   var key = props.reactKey
+  var readOnly = diagnostico.index === undefined
   if (!index) {
     index = key
   }
   return (
     <div key={key} data-index={index} className='generated-by-array'>
-      {diagnostico.index === undefined ? null : <a className='on-remove' onClick={props.onRemoveDiagnostico}>Remover Diagnóstico</a>}
+      {readOnly ? null : <a className='on-remove' onClick={props.onRemoveDiagnostico}>Remover Diagnóstico</a>}
       <div className='card-input'>
         <label htmlFor={'diagnostico' + index.toString()}>Diagnóstico: </label>
         <input onClick={props.onOpenModal} id={'diagnostico' + index.toString()} value={diagnostico.nome} readOnly />
@@ -50,11 +51,19 @@ const Diagnostico = (props) => {
       <div className='two-column'>
         <div className='card-input'>
           <label htmlFor={'aprazamento' + index.toString()}>Aprazamento: </label>
-          <input id={'aprazamento' + index.toString()} value={diagnostico.aprazamento} readOnly />
+          {readOnly ? <input id={'aprazamento' + index.toString()} value={diagnostico.aprazamento} readOnly />
+            : <select id={'aprazamento' + index.toString()}>
+              {[2, 4, 8, 12, 24].map((h, key) => {
+                return (<option key={key} value={h.toString() + '/' + h}>{h.toString() + '/' + h}</option>)
+              })}
+              </select>}
         </div>
         <div className='card-input'>
           <label htmlFor={'avaliacao' + index.toString()}>Avaliação: </label>
-          <input id={'avaliacao' + index.toString()} value={diagnostico.avaliacao} readOnly />
+          <input type='text'
+            id={'avaliacao' + index.toString()} value={readOnly ? diagnostico.avaliacao : undefined}
+            readOnly={readOnly}
+          />
         </div>
       </div>
     </div>
@@ -180,8 +189,6 @@ class Prescricao extends Component {
 
   onSelectValue (value, index, param) {
     console.log(index, value)
-    // Tenho que verificar se é um resultado ou diag msm
-    // tenho também que adicionar novos diagnosticos
     for (var i = 0; i < this.state.diagnosticos.length; i++) {
       if (this.state.diagnosticos[i].index === parseInt(index)) {
         switch (param) {

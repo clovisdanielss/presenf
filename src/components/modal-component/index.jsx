@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import './index.css'
 import { Link } from 'react-router'
 import voltarIcon from '../../public/voltar.svg'
+import CustomizeDiagnostico from '../modal-customize-diagnostico'
 
 Modal.setAppElement('#root')
 
@@ -16,17 +17,40 @@ class ModalComponent extends Component {
         index: null
       },
       search: '',
-      cipeData: []
+      cipeData: [],
+      customize: false,
+      customizeTargetId: undefined
     }
 
     this.onAfterOpenModal = this.onAfterOpenModal.bind(this)
     this.onTableSearchUpdate = this.onTableSearchUpdate.bind(this)
     this.onSelectValue = this.onSelectValue.bind(this)
+    this.onCloseModal = this.onCloseModal.bind(this)
+    this.onCustomize = this.onCustomize.bind(this)
+    this.onCustomizeSearch = this.onCustomizeSearch.bind(this)
+    this.onCustomizeSelectValue = this.onCustomizeSelectValue.bind(this)
+  }
+
+  onCustomize () {
+    this.setState({ customize: !this.state.customize })
+    this.forceUpdate()
+  }
+
+  onCloseModal () {
+    this.setState({ search: '', customizeTargetId: undefined, customize: false })
+    this.props.onCloseModal()
   }
 
   onSelectValue (e) {
-    this.props.onSelectValue(e.target.id, this.state.query.index, this.state.query.name)
-    this.props.onCloseModal()
+    this.props.onSelectValue(e.target.getAttribute('data-value'), this.state.query.index, this.state.query.name)
+    this.onCloseModal()
+  }
+
+  onCustomizeSelectValue (e) {
+    if (this.state.customizeTargetId) {
+      document.getElementById(this.state.customizeTargetId).value = e.target.getAttribute('data-value')
+      this.forceUpdate()
+    }
   }
 
   shouldComponentUpdate (newProps, newState) {
@@ -66,6 +90,19 @@ class ModalComponent extends Component {
     this.forceUpdate()
   }
 
+  onCustomizeSearch (e) {
+    var xhr = new XMLHttpRequest()
+    this.setState({ search: '', customizeTargetId: e.target.id })
+    xhr.addEventListener('load', () => {
+      var result = JSON.parse(xhr.responseText)
+      this.setState({ cipeData: result })
+      this.forceUpdate()
+    })
+    var eixo = e.target.getAttribute('data-eixo')
+    xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)
+    xhr.send()
+  }
+
   onAfterOpenModal () {
     var xhr = new XMLHttpRequest()
     xhr.addEventListener('load', () => {
@@ -79,19 +116,24 @@ class ModalComponent extends Component {
     } else if (this.state.query.name === 'Intervenção') {
       eixo = 'IC'
     } else if (this.state.query.name === 'Resultado') {
-      eixo = 'OC'
+      eixo = 'OC' // Documento junta diagnósticos e resultados por serem do mesmo eixo
     }
     xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)
     xhr.send()
   }
 
+  /* TODO conteúdo da busca está atrabalhando outros modais. */
   render () {
+    var message = 'Criar '
+    if (this.state.query && this.state.query.name) {
+      message = message.concat(this.state.query.name.toLowerCase())
+    }
     return (
       <Modal
         className='modal'
         isOpen={this.props.modalOpen}
         onAfterOpen={this.onAfterOpenModal}
-        onRequestClose={this.props.onCloseModal}
+        onRequestClose={this.onCloseModal}
         contentLabel='Example Modal'
       >
         <div className='card-container card-container-table'>
@@ -99,17 +141,27 @@ class ModalComponent extends Component {
           <hr />
           <div>
             <div className='card-input img-input'>
-              <a onClick={this.props.onCloseModal}>
-                <img src={voltarIcon} width='30' />
+              <a onClick={this.onCloseModal}>
+                <img className='voltar-pequeno' src={voltarIcon} />
                 <label>Voltar</label>
               </a>
             </div>
-            <div className='card-input'>
-              <label htmlFor='search-bar'>Busca:</label>
-              <input id='search-bar' type='input' onChange={this.tableSearchUpdate} />
-            </div>
+            {this.state.customize ? null
+              : <div className='card-input'>
+                <label htmlFor='search-bar'>Busca:</label>
+                <input id='search-bar' type='input' onChange={this.onTableSearchUpdate} />
+              </div>}
           </div>
           <hr />
+          {
+            this.state.customize
+              ? <CustomizeDiagnostico
+                onCustomizeSearch={this.onCustomizeSearch}
+                onTableSearchUpdate={this.onTableSearchUpdate}
+                onSelectValue={this.onSelectValue}
+              />
+              : null
+          }
           <div className='wrapper'>
             <table>
               <thead>
@@ -125,13 +177,23 @@ class ModalComponent extends Component {
                     return (
                       <tr key={index}>
                         <td>{doc['termo ']}</td>
-                        <td id={doc['termo ']} onClick={this.onSelectValue}>
+                        <td
+                          id={doc['termo ']} data-value={doc['termo ']}
+                          onClick={this.state.customize ? this.onCustomizeSelectValue : this.onSelectValue}
+                        >
                       Selecionar
                         </td>
                       </tr>
                     )
                   }
                 })}
+                {
+                  this.state.customize ? null
+                    : <tr>
+                      <td>{message}</td>
+                      <td onClick={this.onCustomize}>Selecionar</td>
+                      </tr>
+                }
               </tbody>
             </table>
           </div>

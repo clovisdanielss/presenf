@@ -33,6 +33,10 @@
 .two-column>.card-input>input{
   width: 250px;
 }
+
+.two-column>.card-input>select{
+  width: 266px;
+}
 .card-container-prescricao > h2{
   text-align: center;
   padding: 20px;
