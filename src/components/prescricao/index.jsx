@@ -35,22 +35,19 @@ class Prescricao extends Component {
 
   // Método para salvar prescrição
   onSave (e) {
+    this.state.diagnosticos.map((diagnostico)=>{
+      diagnostico.id = null
+      diagnostico.idPrescricao = null
+      diagnostico.intervencaos.map((intervencao)=>{
+        intervencao.id = null
+        intervencao.idDiagnostico = null
+      })
+    })
     var prescricao = {
       coren: this.state.enfermeiro.coren,
       observacao: this.state.observacao,
-      diagnosticos: [],
-      resultados: [],
-      intervencaos: [],
-      aprazamentos: [],
-      avaliacoes: []
+      diagnosticos: this.state.diagnosticos
     }
-    this.state.diagnosticos.map((diagnostico) => {
-      prescricao.diagnosticos.push(diagnostico.nome)
-      prescricao.resultados.push(diagnostico.resultado)
-      prescricao.intervencaos.push(diagnostico.intervencao)
-      prescricao.aprazamentos.push(diagnostico.aprazamento)
-      prescricao.avaliacoes.push(diagnostico.avaliacao)
-    })
     var xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4 && xhr.status === 201) {
