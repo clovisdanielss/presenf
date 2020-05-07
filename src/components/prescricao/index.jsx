@@ -35,10 +35,10 @@ class Prescricao extends Component {
 
   // Método para salvar prescrição
   onSave (e) {
-    this.state.diagnosticos.map((diagnostico)=>{
+    this.state.diagnosticos.map((diagnostico) => {
       diagnostico.id = null
       diagnostico.idPrescricao = null
-      diagnostico.intervencaos.map((intervencao)=>{
+      diagnostico.intervencaos.map((intervencao) => {
         intervencao.id = null
         intervencao.idDiagnostico = null
       })
@@ -88,12 +88,20 @@ class Prescricao extends Component {
   onChangeValue (e) {
     var index = e.target.id.replace(/\D/g, '')
     var param = e.target.id.replace(/\d/g, '')
+    var dataIndex = e.target.getAttribute('data-index')
     if (e.target.id === 'observacao') {
       this.state.observacao = e.target.value
     } else {
       for (var i = 0; i < this.state.diagnosticos.length; i++) {
         if (this.state.diagnosticos[i].index === parseInt(index)) {
-          this.state.diagnosticos[i][param] = e.target.value
+          if (!dataIndex) {
+            this.state.diagnosticos[i][param] = e.target.value
+          } else {
+            var diagnostico = this.state.diagnosticos[i]
+            diagnostico.intervencaos.map((intervencao) => {
+              intervencao[param] = e.target.value
+            })
+          }
         }
       }
     }

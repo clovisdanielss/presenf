@@ -44,7 +44,7 @@ const PrescricaoWrite = (props) => {
         <label htmlFor='observacao'>Observação: </label>
         <input onChange={props.onChangeValue} id='observacao' />
       </div>
-      <a onClick={props.onAdicionarDiagnostico}>Criar novo diagnóstico</a>
+      <a className="add-remove-button" onClick={props.onAdicionarDiagnostico}><b>Criar</b> novo diagnóstico</a>
       <div className='prescricao-icons'>
         <div>
           <figcaption htmlFor='voltar'>Voltar:</figcaption>

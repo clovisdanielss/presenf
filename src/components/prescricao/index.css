@@ -2,7 +2,9 @@
   width: 600px;
 }
 
-
+.diagnostico-header{
+  text-align: center;
+}
 .prescricao-icons{
   margin-top:20px;
   display: flex;
@@ -10,8 +12,12 @@
   justify-content: space-around;
 }
 
-.on-remove{
-  margin-bottom: 10px;
+.add-remove-button{
+  display: block;
+  background: var(--color-white);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px 0px 20px 0px;
 }
 
 .prescricao-icons>div>a>img{

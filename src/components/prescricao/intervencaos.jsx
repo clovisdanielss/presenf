@@ -13,7 +13,7 @@ const Intervencaos = (props) => {
             <div className='generated-by-array' key={key}>
               {
                 readOnly ? null:
-                <a onClick={props.onRemoveIntervencao} data-index={index} data-intervencao-index={intervencao.index}>Remover intervenção</a>
+                <a className="add-remove-button" onClick={props.onRemoveIntervencao} data-index={index} data-intervencao-index={intervencao.index}><b>Remover</b> intervenção</a>
               }
               <div className='card-input'>
                 <label htmlFor={'intervencao' + intervencao.index}>Intervenção: </label>
@@ -23,19 +23,19 @@ const Intervencaos = (props) => {
                 <div className='card-input'>
                   <label htmlFor={'profissional' + intervencao.index}> Profissional: </label>
                   {readOnly ? <input id={'profissional' + intervencao.index} value={intervencao.profissional} readOnly />
-                    : <select onChange={props.onChangeValue} id={'profissional' + intervencao.index}>
+                    : <select onChange={props.onChangeValue} id={'profissional' + intervencao.index} data-index={index}>
                       {['Enfermeiro', 'Técnico de Enf.'].map((pro, key) => {
-                        return (<option key={key} value={pro}>{pro}</option>)
+                        return (<option key={key} value={pro} selected={pro==intervencao.profissional}>{pro}</option>)
                       })}
                       </select>}
                 </div>
                 <div className='card-input'>
                   <label htmlFor={'aprazamento' + intervencao.index}>Aprazamento: </label>
                   {readOnly ? <input id={'aprazamento' + intervencao.index} value={intervencao.aprazamento} readOnly />
-                    : <select onChange={props.onChangeValue} id={'aprazamento' + intervencao.index}>
-                      <option value='s/a'>s/a</option>
+                    : <select onChange={props.onChangeValue} id={'aprazamento' + intervencao.index} data-index={index}>
+                      <option value='s/a' selected={intervencao.aprazamento=='s/a'}>s/a</option>
                       {[2, 4, 8, 12, 24].map((h, key) => {
-                        return (<option key={key} value={h.toString() + '/' + h}>{h.toString() + '/' + h}</option>)
+                        return (<option key={key} value={h.toString() + '/' + h} selected={intervencao.aprazamento == h.toString() + '/' + h}>{h.toString() + '/' + h}</option>)
                       })}
                       </select>}
                 </div>
@@ -46,7 +46,7 @@ const Intervencaos = (props) => {
       }
       {
         readOnly ? null:
-        <a data-index={index} onClick={props.onAdicionarIntervencao}>Criar nova intervenção</a>
+        <a data-index={index} className="add-remove-button" onClick={props.onAdicionarIntervencao}><b>Criar</b> nova intervenção</a>
       }
     </div>
   )

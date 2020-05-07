@@ -13,7 +13,9 @@ const Diagnostico = (props) => {
   }
   return (
     <div key={key} data-index={index} className='generated-by-array'>
-      {readOnly ? null : <a className='on-remove' onClick={props.onRemoveDiagnostico}>Remover Diagnóstico</a>}
+      <h2 className="diagnostico-header">Diagnóstico {key+1}</h2>
+      <hr/>
+      {readOnly ? null : <a className="add-remove-button" onClick={props.onRemoveDiagnostico}><b>Remover</b> Diagnóstico</a>}
       <div className='card-input'>
         <label htmlFor={'diagnostico' + index.toString()}>Diagnóstico: </label>
         <input onClick={props.onOpenModal} id={'diagnostico' + index.toString()} value={diagnostico.nome} readOnly />
