@@ -42,7 +42,9 @@ class ModalComponent extends Component {
   }
 
   onSelectValue (e) {
-    this.props.onSelectValue(e.target.getAttribute('data-value'), this.state.query.index, this.state.query.name)
+    this.props.onSelectValue(e.target.getAttribute('data-value'),
+      this.state.query.index,
+      this.state.query.name)
     this.onCloseModal()
   }
 

@@ -34,6 +34,8 @@ const PrescricaoWrite = (props) => {
               onRemoveDiagnostico={props.onRemoveDiagnostico}
               onOpenModal={props.onOpenModal}
               onChangeValue={props.onChangeValue}
+              onAdicionarIntervencao={props.onAdicionarIntervencao}
+              onRemoveIntervencao={props.onRemoveIntervencao}
             />
           )
         })
@@ -42,7 +44,7 @@ const PrescricaoWrite = (props) => {
         <label htmlFor='observacao'>Observação: </label>
         <input onChange={props.onChangeValue} id='observacao' />
       </div>
-      <a onClick={props.onDiagnosticoKey}>Criar novo diagnóstico</a>
+      <a onClick={props.onAdicionarDiagnostico}>Criar novo diagnóstico</a>
       <div className='prescricao-icons'>
         <div>
           <figcaption htmlFor='voltar'>Voltar:</figcaption>

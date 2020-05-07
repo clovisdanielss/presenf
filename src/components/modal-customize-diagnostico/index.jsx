@@ -14,7 +14,6 @@ class CustomizeDiagnostico extends Component {
       data += document.getElementById(item).value + ' '
     })
     e.target.setAttribute('data-value', data)
-    console.log('teste', e.target.getAttribute('data-value'))
     this.props.onSelectValue(e)
   }
 
