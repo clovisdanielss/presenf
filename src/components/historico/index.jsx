@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom'
 import voltarIcon from '../../public/voltar.svg'
 import './index.css'
 import util from '../../util.jsx'
+import {GlobalStateContext} from '../../contexts'
 
 class Historico extends Component {
+
+  static contextType = GlobalStateContext
+
   constructor (props) {
     super(props)
     this.state = {
@@ -12,20 +16,24 @@ class Historico extends Component {
       search: ''
     }
     this.tableSearchUpdate = this.tableSearchUpdate.bind(this)
+    this.loadHistorico = this.loadHistorico.bind(this)
+  }
+
+  loadHistorico () {
+    var xhr = new XMLHttpRequest()
+    xhr.addEventListener('load', () => {
+      var historico = JSON.parse(xhr.responseText)
+      this.setState({ historico: historico })
+    })
+    var url = process.env.REACT_APP_URL + 'paciente/' +
+        this.props.paciente.id.toString() + '/prescricao'
+    xhr.open('GET', url)
+    xhr.setRequestHeader('Authorization', this.context.enfermeiro.token)
+    xhr.send()
   }
 
   componentDidMount () {
-    setTimeout(() => {
-      var xhr = new XMLHttpRequest()
-      xhr.addEventListener('load', () => {
-        var historico = JSON.parse(xhr.responseText)
-        this.setState({ historico: historico })
-      })
-      var url = process.env.REACT_APP_URL + 'paciente/' +
-        this.props.paciente.id.toString() + '/prescricao'
-      xhr.open('GET', url)
-      xhr.send()
-    }, 5)
+    this.loadHistorico()
   }
 
   tableSearchUpdate (event) {

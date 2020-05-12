@@ -3,8 +3,11 @@ import './index.css'
 import ModalComponent from '../modal-component'
 import PrescricaoReadOnly from './prescricao-read-only.jsx'
 import PrescricaoWrite from './prescricao-write.jsx'
-
+import {GlobalStateContext} from '../../contexts'
 class Prescricao extends Component {
+
+  static contextType = GlobalStateContext
+
   constructor (props) {
     super(props)
     this.state = {
@@ -59,6 +62,7 @@ class Prescricao extends Component {
     xhr.open('POST', process.env.REACT_APP_URL + 'paciente/' +
        this.props.paciente.id + '/prescricao')
     xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.setRequestHeader('Authorization', this.context.enfermeiro.token)
     xhr.send(JSON.stringify(prescricao))
   }
 
@@ -189,7 +193,6 @@ class Prescricao extends Component {
   // Carrega diagnóstico e enfermeiro referente a prescrição
 
   loadDiagnosticos () {
-    setTimeout(() => {
       var prescricao = this.props.prescricao
       var diagReq = new XMLHttpRequest()
       diagReq.addEventListener('load', () => {
@@ -218,8 +221,8 @@ class Prescricao extends Component {
       }
       diagReq.open('GET', process.env.REACT_APP_URL + 'paciente/' +
        this.props.paciente.id + '/prescricao/' + prescricao.id + '/diagnostico')
+      diagReq.setRequestHeader('Authorization', this.context.enfermeiro.token)
       diagReq.send()
-    })
   }
 
   loadEnfermeiro () {
@@ -230,6 +233,8 @@ class Prescricao extends Component {
     })
     enfReq.open('GET', process.env.REACT_APP_URL + 'enfermeiro/' +
         this.props.prescricao.coren)
+    enfReq.setRequestHeader('Authorization', this.context.enfermeiro.token)
+
     enfReq.send()
   }
 
@@ -240,13 +245,14 @@ class Prescricao extends Component {
       this.setState({ enfermeiro: enfermeiro[0] })
     })
     enfReq.open('GET', process.env.REACT_APP_URL + 'enfermeiro/' +
-        '2993201')// TODO enfermeiro temporario usado no login
+        this.context.enfermeiro.coren)// TODO enfermeiro temporario usado no login
+    enfReq.setRequestHeader('Authorization', this.context.enfermeiro.token)
+
     enfReq.send()
   }
 
   // Carrega última prescrição, seu diagnóstico e [TEMP] enfermeiro referente a sessão.
   loadPrescricaoRecente () {
-    setTimeout(() => {
       var prescricoesReq = new XMLHttpRequest()
       prescricoesReq.addEventListener('load', () => {
         var prescricoes = JSON.parse(prescricoesReq.responseText)
@@ -255,8 +261,9 @@ class Prescricao extends Component {
       })
       prescricoesReq.open('GET', process.env.REACT_APP_URL + 'paciente/' +
         this.props.paciente.id + '/prescricao')
+      prescricoesReq.setRequestHeader('Authorization', this.context.enfermeiro.token)
+
       prescricoesReq.send()
-    })
   }
 
   componentDidMount () {

@@ -4,10 +4,11 @@ import './index.css'
 import { Link } from 'react-router'
 import voltarIcon from '../../public/voltar.svg'
 import CustomizeDiagnostico from '../modal-customize-diagnostico'
-
+import {GlobalStateContext} from '../../contexts'
 Modal.setAppElement('#root')
 
 class ModalComponent extends Component {
+  static contextType = GlobalStateContext
   constructor (props) {
     super(props)
     this.state = {
@@ -29,6 +30,8 @@ class ModalComponent extends Component {
     this.onCustomize = this.onCustomize.bind(this)
     this.onCustomizeSearch = this.onCustomizeSearch.bind(this)
     this.onCustomizeSelectValue = this.onCustomizeSelectValue.bind(this)
+    this.loadCustomizedEixo = this.loadCustomizedEixo.bind(this)
+    this.loadEixo = this.loadEixo.bind(this)
   }
 
   onCustomize () {
@@ -93,19 +96,14 @@ class ModalComponent extends Component {
   }
 
   onCustomizeSearch (e) {
-    var xhr = new XMLHttpRequest()
-    this.setState({ search: '', customizeTargetId: e.target.id })
-    xhr.addEventListener('load', () => {
-      var result = JSON.parse(xhr.responseText)
-      this.setState({ cipeData: result })
-      this.forceUpdate()
-    })
-    var eixo = e.target.getAttribute('data-eixo')
-    xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)
-    xhr.send()
+    this.loadCustomizedEixo(e)
   }
 
   onAfterOpenModal () {
+    this.loadEixo()
+  }
+
+  loadEixo(){
     var xhr = new XMLHttpRequest()
     xhr.addEventListener('load', () => {
       var result = JSON.parse(xhr.responseText)
@@ -121,6 +119,21 @@ class ModalComponent extends Component {
       eixo = 'OC' // Documento junta diagnósticos e resultados por serem do mesmo eixo
     }
     xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)
+    xhr.setRequestHeader('Authorization', this.context.enfermeiro.token)
+    xhr.send()
+  }
+
+  loadCustomizedEixo(e){
+    var xhr = new XMLHttpRequest()
+    this.setState({ search: '', customizeTargetId: e.target.id })
+    xhr.addEventListener('load', () => {
+      var result = JSON.parse(xhr.responseText)
+      this.setState({ cipeData: result })
+      this.forceUpdate()
+    })
+    var eixo = e.target.getAttribute('data-eixo')
+    xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)
+    xhr.setRequestHeader('Authorization', this.context.enfermeiro.token)
     xhr.send()
   }
 

@@ -23,19 +23,18 @@ const Intervencaos = (props) => {
                 <div className='card-input'>
                   <label htmlFor={'profissional' + intervencao.index}> Profissional: </label>
                   {readOnly ? <input id={'profissional' + intervencao.index} value={intervencao.profissional} readOnly />
-                    : <select onChange={props.onChangeValue} id={'profissional' + intervencao.index} data-index={index}>
+                    : <select defaultValue={intervencao ? intervencao.profissional:'Enfermeiro'} onChange={props.onChangeValue} id={'profissional' + intervencao.index} data-index={index}>
                       {['Enfermeiro', 'Técnico de Enf.'].map((pro, key) => {
-                        return (<option key={key} value={pro} selected={pro==intervencao.profissional}>{pro}</option>)
+                        return (<option key={key} value={pro} >{pro}</option>)
                       })}
                       </select>}
                 </div>
                 <div className='card-input'>
                   <label htmlFor={'aprazamento' + intervencao.index}>Aprazamento: </label>
                   {readOnly ? <input id={'aprazamento' + intervencao.index} value={intervencao.aprazamento} readOnly />
-                    : <select onChange={props.onChangeValue} id={'aprazamento' + intervencao.index} data-index={index}>
-                      <option value='s/a' selected={intervencao.aprazamento=='s/a'}>s/a</option>
+                    : <select defaultValue={intervencao ? intervencao.aprazamento:'s/a'} onChange={props.onChangeValue} id={'aprazamento' + intervencao.index} data-index={index}>
                       {[2, 4, 8, 12, 24].map((h, key) => {
-                        return (<option key={key} value={h.toString() + '/' + h} selected={intervencao.aprazamento == h.toString() + '/' + h}>{h.toString() + '/' + h}</option>)
+                        return (<option key={key} value={h.toString() + '/' + h} >{h.toString() + '/' + h}</option>)
                       })}
                       </select>}
                 </div>

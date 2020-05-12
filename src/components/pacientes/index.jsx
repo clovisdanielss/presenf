@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import './index.css'
 import paciente from '../../public/paciente.png'
 import gestao from '../../public/gestao.png'
-
+import {GlobalStateContext} from '../../contexts'
 class Pacientes extends Component {
+  static contextType = GlobalStateContext
   constructor (props) {
     super(props)
     this.state = {
@@ -12,6 +13,7 @@ class Pacientes extends Component {
       pacientes: []
     }
     this.onTableSearchUpdate = this.onTableSearchUpdate.bind(this)
+    this.loadPacientes = this.loadPacientes.bind(this)
   }
 
   onTableSearchUpdate (event) {
@@ -20,16 +22,20 @@ class Pacientes extends Component {
     this.forceUpdate()
   }
 
-  componentDidMount () {
-    setTimeout(() => {
+  loadPacientes () {
       var xhr = new XMLHttpRequest()
       xhr.addEventListener('load', () => {
         var pacientes = JSON.parse(xhr.responseText)
         this.setState({ pacientes: pacientes })
       })
       xhr.open('GET', process.env.REACT_APP_URL + 'paciente')
+      xhr.setRequestHeader('Authorization', this.context.enfermeiro.token)
       xhr.send()
-    }, 5)
+  }
+
+
+  componentDidMount () {
+    this.loadPacientes()
   }
 
   render () {
@@ -58,7 +64,7 @@ class Pacientes extends Component {
               {this.state.pacientes.map((paciente, index) => {
                 var search = new RegExp(this.state.search)
                 if (search.test(paciente.nome) ||
-						search.test(paciente.leito.toString())) {
+            search.test(paciente.leito.toString())) {
                   return (
                     <tr key={index}>
                       <td>

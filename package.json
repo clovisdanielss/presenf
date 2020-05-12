@@ -14,7 +14,7 @@
   "scripts": {
     "start": "REACT_APP_URL=https://api-presenf.herokuapp.com/ react-scripts start",
     "build": "REACT_APP_URL=https://api-presenf.herokuapp.com/ react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "REACT_APP_URL=http://localhost:8080/ react-scripts start",
     "eject": "react-scripts eject"
   },
   "browserslist": {
