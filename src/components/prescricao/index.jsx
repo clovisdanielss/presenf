@@ -116,7 +116,6 @@ class Prescricao extends Component {
       query: e.target.id,
       modalOpen: true
     })
-    this.forceUpdate()
   }
 
   onCloseModal (e) {
@@ -124,39 +123,49 @@ class Prescricao extends Component {
       modalOpen: false,
       query: ''
     })
-    this.forceUpdate()
   }
 
   // Adicionar diagnostico
   onAdicionarDiagnostico (e) {
-    this.state.diagnosticos.push({
+    let diagnosticos = this.state.diagnosticos
+    diagnosticos.push({
       index: this.state.diagnosticosIndexes,
       nome: '',
       resultado: '',
       avaliacao: '',
       intervencaos: []
     })
-    this.state.diagnosticosIndexes++
+    let diagnosticosIndexes = this.state.diagnosticosIndexes
+    diagnosticosIndexes ++
 
-    this.forceUpdate()
+    this.setState({
+      diagnosticos:diagnosticos,
+      diagnosticosIndexes:diagnosticosIndexes
+    })
   }
 
   // Método para adicionar campo de intervenção.
   onAdicionarIntervencao (e) {
     var index = e.target.getAttribute('data-index').replace(/\D/g, '')
+    let diagnosticos = []
+    let intervencaosIndexes = this.state.intervencaosIndexes
     index = parseInt(index)
-    for (var i = 0; i < this.state.diagnosticos.length; i++) {
-      if (this.state.diagnosticos[i].index === index) {
-        this.state.diagnosticos[i].intervencaos.push({
-          index: this.state.intervencaosIndexes,
+    this.state.diagnosticos.map((diagnostico)=>{
+      if(diagnostico.index === index){
+        diagnostico.intervencaos.push({
+          index: intervencaosIndexes,
           aprazamento: 's/a',
           profissional: 'Enfermeiro',
           nome: ''
         })
-        this.state.intervencaosIndexes++
+        intervencaosIndexes ++
       }
-    }
-    this.forceUpdate()
+      diagnosticos.push(diagnostico)
+    })
+    this.setState({
+      diagnosticos:diagnosticos,
+      intervencaosIndexes:intervencaosIndexes
+    })
   }
 
   onRemoveDiagnostico (e) {
@@ -168,7 +177,6 @@ class Prescricao extends Component {
       }
     }
     this.setState({ diagnosticos: diagnosticos })
-    this.forceUpdate()
   }
 
   // Método para remover intervenção
@@ -176,6 +184,7 @@ class Prescricao extends Component {
     var index = e.target.getAttribute('data-index')
     var indexIntervencao = e.target.getAttribute('data-intervencao-index')
     var intervencaos = []
+    var diagnosticos = []
     for (var i = 0; i < this.state.diagnosticos.length; i++) {
       var diagnostico = this.state.diagnosticos[i]
       if (diagnostico.index == index) {
@@ -186,8 +195,9 @@ class Prescricao extends Component {
         }
         diagnostico.intervencaos = intervencaos
       }
+      diagnosticos.push(diagnostico)
     }
-    this.forceUpdate()
+    this.setState({diagnosticos:diagnosticos})
   }
 
   // Carrega diagnóstico e enfermeiro referente a prescrição

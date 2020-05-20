@@ -4,7 +4,7 @@ import './index.css'
 import { Link } from 'react-router'
 import voltarIcon from '../../public/voltar.svg'
 import CustomizeDiagnostico from '../modal-customize-diagnostico'
-import {GlobalStateContext} from '../../contexts'
+import { GlobalStateContext } from '../../contexts'
 Modal.setAppElement('#root')
 
 class ModalComponent extends Component {
@@ -32,11 +32,11 @@ class ModalComponent extends Component {
     this.onCustomizeSelectValue = this.onCustomizeSelectValue.bind(this)
     this.loadCustomizedEixo = this.loadCustomizedEixo.bind(this)
     this.loadEixo = this.loadEixo.bind(this)
+    this.updateQuery = this.updateQuery.bind(this)
   }
 
   onCustomize () {
     this.setState({ customize: !this.state.customize })
-    this.forceUpdate()
   }
 
   onCloseModal () {
@@ -54,19 +54,10 @@ class ModalComponent extends Component {
   onCustomizeSelectValue (e) {
     if (this.state.customizeTargetId) {
       document.getElementById(this.state.customizeTargetId).value = e.target.getAttribute('data-value')
-      this.forceUpdate()
     }
   }
 
-  shouldComponentUpdate (newProps, newState) {
-    if (newProps.query === this.state.query.id) {
-      return false
-    } else {
-      return true
-    }
-  }
-
-  componentDidUpdate () {
+  updateQuery () {
     var aux = this.props.query.replace(/\d/g, '')
     var index = this.props.query.replace(/\D/g, '')
     if (aux.length > 0) {
@@ -90,9 +81,14 @@ class ModalComponent extends Component {
     })
   }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.query !== prevProps.query) {
+      this.updateQuery()
+    }
+  }
+
   onTableSearchUpdate (event) {
     this.setState({ search: event.target.value })
-    this.forceUpdate()
   }
 
   onCustomizeSearch (e) {
@@ -103,12 +99,11 @@ class ModalComponent extends Component {
     this.loadEixo()
   }
 
-  loadEixo(){
+  loadEixo () {
     var xhr = new XMLHttpRequest()
     xhr.addEventListener('load', () => {
       var result = JSON.parse(xhr.responseText)
       this.setState({ cipeData: result })
-      this.forceUpdate()
     })
     var eixo = ''
     if (this.state.query.name === 'Diagnóstico') {
@@ -123,13 +118,12 @@ class ModalComponent extends Component {
     xhr.send()
   }
 
-  loadCustomizedEixo(e){
+  loadCustomizedEixo (e) {
     var xhr = new XMLHttpRequest()
     this.setState({ search: '', customizeTargetId: e.target.id })
     xhr.addEventListener('load', () => {
       var result = JSON.parse(xhr.responseText)
       this.setState({ cipeData: result })
-      this.forceUpdate()
     })
     var eixo = e.target.getAttribute('data-eixo')
     xhr.open('GET', process.env.REACT_APP_URL + 'cipe?eixo=' + eixo)

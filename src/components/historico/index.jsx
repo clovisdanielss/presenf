@@ -38,8 +38,6 @@ class Historico extends Component {
 
   tableSearchUpdate (event) {
     this.setState({ search: event.target.value })
-    console.log(this.state)
-    this.forceUpdate()
   }
 
   render () {

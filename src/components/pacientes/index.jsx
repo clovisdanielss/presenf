@@ -18,8 +18,6 @@ class Pacientes extends Component {
 
   onTableSearchUpdate (event) {
     this.setState({ search: event.target.value })
-    console.log(this.state)
-    this.forceUpdate()
   }
 
   loadPacientes () {

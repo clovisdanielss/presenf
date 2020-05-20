@@ -33,6 +33,7 @@ const Intervencaos = (props) => {
                   <label htmlFor={'aprazamento' + intervencao.index}>Aprazamento: </label>
                   {readOnly ? <input id={'aprazamento' + intervencao.index} value={intervencao.aprazamento} readOnly />
                     : <select defaultValue={intervencao ? intervencao.aprazamento:'s/a'} onChange={props.onChangeValue} id={'aprazamento' + intervencao.index} data-index={index}>
+                      <option value={'s/a'}> s/a </option>
                       {[2, 4, 8, 12, 24].map((h, key) => {
                         return (<option key={key} value={h.toString() + '/' + h} >{h.toString() + '/' + h}</option>)
                       })}
