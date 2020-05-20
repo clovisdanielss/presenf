@@ -73,7 +73,10 @@ a{
 	width: 80px;
 	float:left;
 }
-h3{
+h4{
+	text-align: center;
+}
+h3,h4{
 	/*Essa margem não pode ser mudada, se não a figura não fica legal*/
 	color:var(--color-gray);
 	margin-top: 30px;

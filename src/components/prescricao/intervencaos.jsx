@@ -11,6 +11,8 @@ const Intervencaos = (props) => {
         intervencaos.map((intervencao, key) => {
           return (
             <div className='generated-by-array' key={key}>
+              <h4>Intervenção {props.reactKey+1}.{key+1}</h4>
+              <hr/>
               {
                 readOnly ? null:
                 <a className="add-remove-button" onClick={props.onRemoveIntervencao} data-index={index} data-intervencao-index={intervencao.index}><b>Remover</b> intervenção</a>
