@@ -94,8 +94,9 @@ class Prescricao extends Component {
     var param = e.target.id.replace(/\d/g, '')
     var dataIndex = e.target.getAttribute('data-index')
     if (e.target.id === 'observacao') {
-      this.state.observacao = e.target.value
+      this.setState({observacao:e.target.value})
     } else {
+      var diagnosticos = []
       for (var i = 0; i < this.state.diagnosticos.length; i++) {
         if (this.state.diagnosticos[i].index === parseInt(index)) {
           if (!dataIndex) {
@@ -107,7 +108,9 @@ class Prescricao extends Component {
             })
           }
         }
+        diagnosticos.push(this.state.diagnosticos[i])
       }
+      this.setState({diagnosticos:diagnosticos})
     }
   }
 
