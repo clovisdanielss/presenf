@@ -18,7 +18,7 @@ class CustomizeDiagnostico extends Component {
   }
 
   render () {
-    return (<div>
+    return (<div className='modal-menu'>
       <div className='card-input-group'>
         <div className='card-input'>
           <label htmlFor='action-bar'>Ação:</label>

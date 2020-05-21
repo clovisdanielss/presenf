@@ -10,3 +10,19 @@
 .modal-button{
   margin: 10px 20px;
 }
+
+
+
+
+@media(max-width: 880px){
+  .card-input-group{
+    display: block;
+    text-align: center;
+  }
+  .modal-menu{
+    position: relative;
+    overflow:auto;
+    height: 200px;
+  }
+
+}
