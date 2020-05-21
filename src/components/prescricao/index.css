@@ -52,3 +52,22 @@
   margin-bottom: 20px;
   padding:0px;
 }
+
+@media(max-width: 680px){
+  .card-container-prescricao{
+    width: 90%;
+    padding: 5%;
+  }
+}
+
+@media(max-width: 500px){
+  .generated-by-array>.two-column,
+.card-container-prescricao>.two-column{
+  display: block;
+  width: 100%;
+}
+
+.two-column>.card-input>input{
+  width: 95%;
+}
+}

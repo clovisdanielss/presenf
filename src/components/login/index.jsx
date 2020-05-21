@@ -15,6 +15,7 @@ class Login extends Component {
     super(props)
     this.state = {
       authenticationRecieved: false,
+      requestSent:false,
       coren: '',
       senha: ''
     }
@@ -41,6 +42,18 @@ class Login extends Component {
       senha: this.state.senha
     }
     xhr.send(JSON.stringify(login))
+    this.setState({requestSent:true})
+  }
+
+  componentDidMount(){
+    let pwd = document.getElementById('senha')
+    pwd.addEventListener('keyup',(event)=>{
+      if(event.keyCode === 13){
+        event.preventDefault()
+        let btn = document.getElementById('login-button')
+        btn.click()
+      }
+    })
   }
 
   onChangeInput (e) {
@@ -53,6 +66,13 @@ class Login extends Component {
         <Redirect to='/paciente' />
       )
     }
+    if (this.state.requestSent){
+      return(
+        <div className='card-container'>
+          <h1> Aguarde enquanto carregamos... </h1>
+        </div>
+      )
+    }
     return (
       <div className='card-container'>
         <div className='card-input'>
@@ -63,7 +83,7 @@ class Login extends Component {
           <label htmlFor='password'>Senha:</label>
           <input onChange={this.onChangeInput} id='senha' type='password' />
         </div>
-        <button type='input' className='button-link' onClick={this.authenticate}>
+        <button id='login-button' type='input' className='button-link' onClick={this.authenticate}>
               Entrar
         </button>
       </div>

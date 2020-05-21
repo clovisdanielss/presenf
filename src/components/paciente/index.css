@@ -1,5 +1,5 @@
 .card-container-paciente{
-  width: 400px;
+  width: 600px;
 }
 
 .card-container-paciente > div > div > a > img{
@@ -8,6 +8,7 @@
 
 .card-container-paciente >.flex-icons{
   display: flex;
+  justify-content: space-between;
 }
 
 .card-container-paciente >div> div{
@@ -34,4 +35,14 @@
 }
 #prescrever>img{
   display: block;
+}
+
+@media(max-width: 680px){
+  .card-container-paciente{
+    width: 90%;
+    padding: 5%;
+  }
+  .card-container-paciente > div > div > a > img{
+    width: 60px;
+  }
 }

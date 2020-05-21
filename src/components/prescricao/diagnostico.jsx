@@ -7,7 +7,6 @@ const Diagnostico = (props) => {
   var index = props.index
   var key = props.reactKey
   var readOnly = diagnostico.index === undefined
-  console.log(intervencaos)
   if (!index) {
     index = key
   }

@@ -37,7 +37,7 @@ body {
 	Deve ser mudado se a tabela for mudada.
 	As tabelas devem possuir um tamanho padrão.*/
 	.body-container{
-		width: var(--not-override-table-size);
+		width: 100%;
 	}
 }
 
@@ -160,15 +160,23 @@ input{
 label{
 	color:var(--color-gray);
 }
-.card-input >input{
-	
-}
+
 
 .button-link{
 	width: 100%;
-	margin-top: 40px;
+	height: 40px;
+	margin-top: 30px;
 }
 
 .body-container > div{
 
+}
+
+@media(max-width: 430px){
+	#search-bar{
+		width: calc(100% - 80px);
+	}
+	.img-input{
+		float: none;
+	}
 }

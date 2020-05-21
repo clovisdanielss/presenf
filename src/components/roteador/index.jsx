@@ -15,7 +15,6 @@ const PrivateRoute = ({ children, ...rest }) => {
   const context = React.useContext(GlobalStateContext)
   const isAuthenticated = () =>{
     if(context.enfermeiro){
-      console.log(Math.floor(Date.now()/1000) , context.enfermeiro.exp)
       return Math.floor(Date.now()/1000) < context.enfermeiro.exp
     }
     return false

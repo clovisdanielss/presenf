@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Main from './components/principal'
-import './index.css'
 import { GlobalStateContext, UpdateGlobalStateContext, globalState } from './contexts.js'
 
 const GlobalStateProvider = ({ children }) => {
