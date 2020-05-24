@@ -5,15 +5,21 @@ import { Link } from 'react-router-dom'
 import Diagnostico from './diagnostico.jsx'
 import util from '../../util.jsx'
 import { useReactToPrint } from 'react-to-print'
+import {Print, NoPrint} from 'react-easy-print'
 
 const PrescricaoReadOnly = (props) => {
   const componentRef = useRef()
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current
-  })
+  // const handlePrint = useReactToPrint({
+  //   content: () => componentRef.current
+  // })
+  const handlePrint = () =>{
+    window.print()
+  }
+
   return (
     <div className='card-container card-container-prescricao'>
-      <div ref={componentRef} className='card-container-prescricao'>
+      <Print>
+      <div className='card-container-prescricao'>
         <h2>Prescricao</h2>
         <hr />
         <div className='two-column'>
@@ -50,6 +56,8 @@ const PrescricaoReadOnly = (props) => {
           <input id='observacao' value={props.prescricao.observacao} readOnly />
         </div>
       </div>
+      </Print>
+      <NoPrint>
       <div className='prescricao-icons'>
         <div>
           <figcaption htmlFor='voltar'>Voltar:</figcaption>
@@ -64,6 +72,7 @@ const PrescricaoReadOnly = (props) => {
           </a>
         </div>
       </div>
+      </NoPrint>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Main from './components/principal'
 import { GlobalStateContext, UpdateGlobalStateContext, globalState } from './contexts.js'
+import PrintProvider from 'react-easy-print'
 
 const GlobalStateProvider = ({ children }) => {
   const [state, setState] = React.useReducer(
@@ -18,7 +19,9 @@ const GlobalStateProvider = ({ children }) => {
 
 ReactDOM.render(
   <GlobalStateProvider>
-    <Main />
+    <PrintProvider>
+      <Main />
+    </PrintProvider>
   </GlobalStateProvider>,
   document.getElementById('root')
 )
