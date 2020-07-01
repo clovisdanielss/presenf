@@ -68,8 +68,12 @@ class Login extends Component {
     }
     if (this.state.requestSent){
       return(
-        <div className='card-container'>
-          <h1> Aguarde enquanto carregamos... </h1>
+        <div className='card-container loading'>
+          <div class="container-boxes">
+            <div class="box"></div>
+            <div class="box"></div>
+          </div>
+          <h1 className="loading"> Carregando... </h1>
         </div>
       )
     }
