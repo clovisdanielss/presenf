@@ -7,11 +7,11 @@
   vertical-align: middle;
   margin-left: 10px;
 }
-.card-container-table>div>.card-input{
+.card-container-table>div>.width-100{
   display: block;
   padding: 20px 20px 0px 20px;
 }
-.card-container-table>div>.card-input>input{
+.card-container-table>div>.width-100>input{
   width: 300px;
   margin-left: 10px;
 }

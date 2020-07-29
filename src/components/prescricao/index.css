@@ -36,11 +36,11 @@
   width: 100%;
 }
 
-.two-column>.card-input>input{
+.two-column>.width-100>input{
   width: 250px;
 }
 
-.two-column>.card-input>select{
+.two-column>.width-100>select{
   width: 266px;
 }
 .card-container-prescricao > h2{
@@ -67,7 +67,7 @@
   width: 100%;
 }
 
-.two-column>.card-input>input{
+.two-column>.width-100>input{
   width: 95%;
 }
 }

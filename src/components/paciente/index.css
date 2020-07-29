@@ -1,29 +1,19 @@
-.card-container-paciente{
-  width: 600px;
-}
 
-.card-container-paciente > div > div > a > img{
+.card > div > div > a > img{
   width: 100px;
 }
 
-.card-container-paciente >.flex-icons{
+.card >.flex-icons{
   display: flex;
   justify-content: space-between;
 }
 
-.card-container-paciente >div> div{
-  text-align: center;
-  margin: 0px 5%;
+.text-left{
+  text-align: left;
 }
 
-.card-container-paciente>h2{
+.card >div> div{
   text-align: center;
-  padding: 20px;
-}
-
-.card-container-paciente>hr{
-  margin-bottom: 20px;
-  padding:0px;
 }
 
 .float-right{

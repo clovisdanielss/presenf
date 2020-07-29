@@ -139,9 +139,8 @@ input{
 }
 /* CSS - Components*/
 
-.card-input{
-	display: grid;
-	margin-bottom: 20px;
+.width-100{
+	width: 100%;
 }
 
 .card-container{
@@ -160,6 +159,12 @@ label{
 	color:var(--color-gray);
 }
 
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+  }
+  
 
 .button-link{
 	width: 100%;
@@ -167,9 +172,6 @@ label{
 	margin-top: 30px;
 }
 
-.body-container > div{
-
-}
 
 @media(max-width: 430px){
 	#search-bar{
@@ -178,4 +180,8 @@ label{
 	.img-input{
 		float: none;
 	}
+}
+
+.card{
+	background-color: var(--color-cyan-blue);
 }

@@ -139,7 +139,7 @@ class ModalComponent extends Component {
     }
     return (
       <Modal
-        className='modal'
+        className='container-fluid'
         isOpen={this.props.modalOpen}
         onAfterOpen={this.onAfterOpenModal}
         onRequestClose={this.onCloseModal}
@@ -149,14 +149,14 @@ class ModalComponent extends Component {
           <h2>Criar {this.state.query.name}</h2>
           <hr />
           <div>
-            <div className='card-input img-input'>
+            <div className='width-100 img-input'>
               <a onClick={this.onCloseModal}>
                 <img className='voltar-pequeno' src={voltarIcon} />
                 <label>Voltar</label>
               </a>
             </div>
             {this.state.customize ? null
-              : <div className='card-input'>
+              : <div className='width-100'>
                 <label htmlFor='search-bar'>Busca:</label>
                 <input id='search-bar' type='input' onChange={this.onTableSearchUpdate} />
               </div>}
