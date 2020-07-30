@@ -1,187 +1,191 @@
 /* CSS - Global */
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  
 }
 
-
-:root{
-	--color-white:#F8F1DA;
-	--color-dark-cyan:#A1C5A2;
-	--color-cyan-blue:#79B4B9;
-	--color-blue:#198D93;
-	--color-gray:#2F3343;
-	--color-pink:#F54337;
-	--not-override-table-size:1500px;
+:root {
+  --color-white: #f8f1da;
+  --color-dark-cyan: #a1c5a2;
+  --color-cyan-blue: #79b4b9;
+  --color-blue: #198d93;
+  --color-gray: #2f3343;
+  --color-pink: #f54337;
+  --not-override-table-size: 1500px;
 }
 
-.body-text{
-	color:var(--color-gray);
+.body-text {
+  color: var(--color-gray);
 }
 
-.body-container,body{
-	background: url('../../public/background.jpg') no-repeat top center fixed;
-	-webkit-background-size: cover;
+.body-container,
+body {
+  background: url("../../public/background.jpg") no-repeat top center fixed;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-	background-size:cover; 
-
+  background-size: cover;
 }
 
-@media(max-width: 1500px){
-	/*Adapta tamanho para qualquer tela de computador.
+@media (max-width: 1500px) {
+  /*Adapta tamanho para qualquer tela de computador.
 	Deve ser mudado se a tabela for mudada.
 	As tabelas devem possuir um tamanho padrão.*/
-	.body-container{
-		width: 100%;
-	}
+  .body-container {
+    width: 100%;
+  }
 }
 
-.header{
-	margin-top: 0px;
-	padding: 15px 15px 10px 15px;
-	background-color: var(--color-cyan-blue);
-	font-size: 1.5em;
+.header {
+  margin-top: 0px;
+  padding: 15px 15px 10px 15px;
+  background-color: var(--color-cyan-blue);
+  font-size: 1.5em;
 }
 
-a{
-	color: inherit; /* blue colors for links too */
+a {
+  color: inherit; /* blue colors for links too */
   text-decoration: inherit;
 }
 
-.header>a{
-	display: inline;
-	padding-right: 40px;
+.header > a {
+  display: inline;
+  padding-right: 40px;
 }
 
-@media(max-width: 650px){
-	.sub-header>ul>li{
-		display: block;
-		padding-bottom: 15px;
-}
-}
-
-.separator{
-	margin:0px;
-	color:var(--color-white);
-}
-.logo{
-	width: 80px;
-	float:left;
-}
-h4{
-	text-align: center;
-}
-h3,h4{
-	/*Essa margem não pode ser mudada, se não a figura não fica legal*/
-	color:var(--color-gray);
-	margin-top: 30px;
-}
-h2{
-	color:var(--color-gray);
-}
-*{
-  font-family: 'Raleway';
-	margin: 0px;
+@media (max-width: 650px) {
+  .sub-header > ul > li {
+    display: block;
+    padding-bottom: 15px;
+  }
 }
 
-table{
-	text-align: center;
+.separator {
+  margin: 0px;
+  color: var(--color-white);
+}
+.logo {
+  width: 80px;
+  float: left;
+}
+h4 {
+  text-align: center;
+}
+h3,
+h4 {
+  /*Essa margem não pode ser mudada, se não a figura não fica legal*/
+  color: var(--color-gray);
+  margin-top: 30px;
+}
+h2 {
+  color: var(--color-gray);
+}
+* {
+  font-family: "Raleway";
+  margin: 0px;
 }
 
-.link-table,a{
-	color: var(--color-gray);
+table {
+  text-align: center;
 }
 
-td,th{
-	position: sticky;
-	color:var(--color-gray);
-	font-size: 30px;
-	padding: 1rem 2rem;
-	border-bottom-style: solid;
-	font-size: 22px;
-	min-width:100px;
-	max-width:300px;
+.link-table,
+a {
+  color: var(--color-gray);
 }
 
-.wrapper{
+td,
+th {
+  position: sticky;
+  color: var(--color-gray);
+  font-size: 30px;
+  padding: 1rem 2rem;
+  border-bottom-style: solid;
+  font-size: 22px;
+  min-width: 100px;
+  max-width: 300px;
+}
 
-	height: 500px;
-	position: relative;
+.wrapper {
+  height: 500px;
+  position: relative;
   overflow: auto;
-
 }
 
-hr{
-	clear: both;
+hr {
+  clear: both;
 }
 
-table{
-	text-align: center;
-	border-collapse: collapse;
-	width: 100%;
+table {
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-select{
-	height: 42px;/*+12*/
+select {
+  height: 42px; /*+12*/
 }
-input{
-	word-break: break-word;
-	height: 30px;
+input {
+  word-break: break-word;
+  height: 30px;
 }
-.voltar-pequeno{
+.voltar-pequeno {
   width: 40px;
   vertical-align: middle;
 }
 /* CSS - Components*/
 
-.width-100{
-	width: 100%;
+.width-100 {
+  width: 100%;
 }
 
-.card-container{
-	width: 300px;
-	margin: 5% auto;
-	border-radius: 20px;
-	background-color: var(--color-cyan-blue);
-	padding: 20px;
+.tr {
+  transition: background-color 0.5s;
+}
+.tr:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.card-container {
+  width: 300px;
+  margin: 5% auto;
+  border-radius: 20px;
+  background-color: var(--color-cyan-blue);
+  padding: 20px;
 }
 .card-container > label,
 .card-container > p,
-.card-container > a{
-	color:var(--color-gray);
+.card-container > a {
+  color: var(--color-gray);
 }
-label{
-	color:var(--color-gray);
+label {
+  color: var(--color-gray);
 }
 
 .flex-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-link {
+  width: 100%;
+  height: 40px;
+  margin-top: 30px;
+}
+
+@media (max-width: 430px) {
+  #search-bar {
+    width: calc(100% - 80px);
   }
-  
-
-.button-link{
-	width: 100%;
-	height: 40px;
-	margin-top: 30px;
+  .img-input {
+    float: none;
+  }
 }
 
-
-@media(max-width: 430px){
-	#search-bar{
-		width: calc(100% - 80px);
-	}
-	.img-input{
-		float: none;
-	}
-}
-
-.card{
-	background-color: var(--color-cyan-blue);
+.card {
+  background-color: var(--color-cyan-blue);
 }

@@ -82,7 +82,7 @@ class Login extends Component {
               <label htmlFor="coren">Coren:</label>
               <input onChange={this.onChangeInput} className="form-control" id="coren" />
             </div>
-            <div className="width-100">
+            <div className="width-100 mt-4">
               <label htmlFor="password">Senha:</label>
               <input onChange={this.onChangeInput} id="senha" className="form-control" type="password" />
             </div>

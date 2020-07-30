@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import voltarIcon from "../../public/voltar.svg";
 import "./index.css";
 import util from "../../util.jsx";
@@ -12,10 +12,12 @@ class Historico extends Component {
     super(props);
     this.state = {
       historico: null,
+      prescricao: false,
       search: "",
     };
     this.tableSearchUpdate = this.tableSearchUpdate.bind(this);
     this.loadHistorico = this.loadHistorico.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   loadHistorico() {
@@ -34,6 +36,18 @@ class Historico extends Component {
     xhr.send();
   }
 
+  onSelect(e) {
+    let id = e.currentTarget.getAttribute("data-index");
+    let prescricao = null;
+    this.state.historico.map((p) => {
+      if (p.id == id) {
+        prescricao = p;
+      }
+    });
+    this.setState({ prescricao });
+    this.props.loadData(prescricao);
+  }
+
   componentDidMount() {
     this.loadHistorico();
   }
@@ -43,6 +57,18 @@ class Historico extends Component {
   }
 
   render() {
+    if (this.state.prescricao) {
+      return (
+        <Redirect
+          to={
+            "/paciente/" +
+            this.props.paciente.id +
+            "/prescricao/" +
+            this.state.prescricao.id
+          }
+        ></Redirect>
+      );
+    }
     const loadData = this.props.loadData;
     if (this.state.historico) {
       return (
@@ -79,7 +105,6 @@ class Historico extends Component {
                   <td>Data Prescrição: </td>
                   <td>Hora Prescrição: </td>
                   <td>Observação: </td>
-                  <td>Selecionar</td>
                 </tr>
               </thead>
               <tbody>
@@ -91,7 +116,12 @@ class Historico extends Component {
                     search.test(prescricao.coren)
                   ) {
                     return (
-                      <tr key={index}>
+                      <tr
+                        key={index}
+                        data-index={prescricao.id}
+                        className="tr"
+                        onClick={this.onSelect}
+                      >
                         <td> {prescricao.coren} </td>
                         <td>
                           {util.formmatDate(prescricao.dataCriacao) || null}
@@ -101,24 +131,6 @@ class Historico extends Component {
                         </td>
                         <td>
                           {prescricao.observacao.substr(0, 20) + "..." || null}
-                        </td>
-                        <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return (
-                                "/paciente/" +
-                                this.props.paciente.id +
-                                "/prescricao/" +
-                                prescricao.id
-                              );
-                            }}
-                            onClick={() => {
-                              loadData(prescricao);
-                            }}
-                          >
-                            Selecionar
-                          </Link>
                         </td>
                       </tr>
                     );

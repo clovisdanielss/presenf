@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./index.css";
 import paciente from "../../public/paciente.png";
 import gestao from "../../public/gestao.png";
@@ -11,9 +11,23 @@ class Pacientes extends Component {
     this.state = {
       search: "",
       pacientes: null,
+      paciente: false,
     };
     this.onTableSearchUpdate = this.onTableSearchUpdate.bind(this);
     this.loadPacientes = this.loadPacientes.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
+
+  onSelect(e){
+    let id = e.currentTarget.getAttribute("data-index");
+    let paciente = null;
+    this.state.pacientes.map(p=>{
+      if(p.id == id){
+        paciente = p;
+      }
+    })
+    this.setState({paciente});
+    this.props.loadData(paciente);
   }
 
   onTableSearchUpdate(event) {
@@ -36,6 +50,9 @@ class Pacientes extends Component {
   }
 
   render() {
+    if (this.state.paciente) {
+      return <Redirect to={"/paciente/" + this.state.paciente.id}></Redirect>;
+    }
     const loadData = this.props.loadData;
     if (this.state.pacientes) {
       return (
@@ -70,71 +87,32 @@ class Pacientes extends Component {
                     search.test(paciente.leito.toString())
                   ) {
                     return (
-                      <tr key={index}>
+                      <tr
+                      className="tr"
+                        key={index}
+                        onClick={this.onSelect}
+                        data-index={paciente.id}
+                      >
                         <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return "/paciente/" + paciente.id;
-                            }}
-                            onClick={() => {
-                              loadData(paciente);
-                            }}
-                          >
+                          <a className="link-table">
                             {paciente.prontuario}
-                          </Link>
+                          </a>
                         </td>
                         <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return "/paciente/" + paciente.id;
-                            }}
-                            onClick={() => {
-                              loadData(paciente);
-                            }}
-                          >
-                            {paciente.nome}
-                          </Link>
+                          <a className="link-table">{paciente.nome}</a>
                         </td>
                         <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return "/paciente/" + paciente.id;
-                            }}
-                            onClick={() => {
-                              loadData(paciente);
-                            }}
-                          >
-                            {paciente.leito}
-                          </Link>
+                          <a className="link-table">{paciente.leito}</a>
                         </td>
                         <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return "/paciente/" + paciente.id;
-                            }}
-                            onClick={() => {
-                              loadData(paciente);
-                            }}
-                          >
+                          <a className="link-table">
                             {paciente.diasLeito}
-                          </Link>
+                          </a>
                         </td>
                         <td>
-                          <Link
-                            className="link-table"
-                            to={() => {
-                              return "/paciente/" + paciente.id;
-                            }}
-                            onClick={() => {
-                              loadData(paciente);
-                            }}
-                          >
+                          <a className="link-table">
                             {paciente.diasHospital}
-                          </Link>
+                          </a>
                         </td>
                       </tr>
                     );
