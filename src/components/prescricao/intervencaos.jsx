@@ -21,7 +21,7 @@ const Intervencaos = (props) => {
                 data-index={index}
                 data-intervencao-index={intervencao.index}
               >
-                <b>Remover</b> intervenção
+                Remover intervenção
               </a>
             )}
             <div className="row">
@@ -108,10 +108,10 @@ const Intervencaos = (props) => {
       {readOnly ? null : (
         <a
           data-index={index}
-          className="add-remove-button mt-4"
+          className="add-insert-button mt-4 micro-btn micro-btn-hover"
           onClick={props.onAdicionarIntervencao}
         >
-          <b>Criar</b> nova intervenção
+          Criar nova intervenção
         </a>
       )}
     </div>

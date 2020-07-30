@@ -16,7 +16,7 @@ const Diagnostico = (props) => {
       <hr />
       {readOnly ? null : (
         <a className="add-remove-button" onClick={props.onRemoveDiagnostico}>
-          <b>Remover</b> Diagnóstico
+          Remover Diagnóstico
         </a>
       )}
       <div className="row">
@@ -39,7 +39,7 @@ const Diagnostico = (props) => {
         intervencaos={intervencaos}
         readOnly={readOnly}
       />
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-md-6 text-left">
           <label htmlFor={"resultado" + index.toString()}>Resultado: </label>
           <input

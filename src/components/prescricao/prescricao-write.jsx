@@ -64,8 +64,8 @@ const PrescricaoWrite = (props) => {
           <textarea className="form-control" onChange={props.onChangeValue} id="observacao" />
         </div>
       </div>
-      <a className="add-remove-button" onClick={props.onAdicionarDiagnostico}>
-        <b>Criar</b> novo diagnóstico
+      <a className="add-insert-button" onClick={props.onAdicionarDiagnostico}>
+        Criar novo diagnóstico
       </a>
       <div className="prescricao-icons">
         <div>

@@ -3,8 +3,8 @@ const globalState = {
   enfermeiro: {
     "id": 6,
     "coren": "583521",
-    "exp": 1596136977,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiY29yZW4iOiI1ODM1MjEiLCJleHAiOjE1OTYxMzc1NzcsImlhdCI6MTU5NjEzMzk3N30.iBWpOVgoo46JjMsOt_xo2YiQlY3DuHHMOb13ibumuGI"
+    "exp": 1596142432,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiY29yZW4iOiI1ODM1MjEiLCJleHAiOjE1OTYxNDMwMzIsImlhdCI6MTU5NjEzOTQzMn0.9PUw7xGoMBt8oT_TCd4oJ1XxEjHh1ApZ12-B6dR0ux4"
   }
 }
 

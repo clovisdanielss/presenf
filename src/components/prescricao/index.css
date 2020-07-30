@@ -1,18 +1,18 @@
-.card-container-prescricao{
+.card-container-prescricao {
   width: 600px;
 }
 
-.diagnostico-header{
+.diagnostico-header {
   text-align: center;
 }
-.prescricao-icons{
-  margin-top:20px;
+.prescricao-icons {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.add-remove-button{
+.add-insert-button {
   display: block;
   background: var(--color-white);
   border-radius: 10px;
@@ -20,54 +20,68 @@
   margin: 5px 0px 20px 0px;
 }
 
-.prescricao-icons>div>a>img{
+.prescricao-icons > div > a > img {
   width: 75px;
 }
 
-.prescricao-icons>div>figcaption{
+.prescricao-icons > div > figcaption {
   text-align: center;
 }
 
-.generated-by-array>.two-column,
-.card-container-prescricao>.two-column{
+.card-container-prescricao > .two-column {
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
 
-.two-column>.width-100>input{
+.two-column > .width-100 > input {
   width: 250px;
 }
 
-.two-column>.width-100>select{
+.two-column > .width-100 > select {
   width: 266px;
 }
-.card-container-prescricao > h2{
+.card-container-prescricao > h2 {
   text-align: center;
   padding: 20px;
 }
 
-.card-container-prescricao > hr{
+.card-container-prescricao > hr {
   margin-bottom: 20px;
-  padding:0px;
+  padding: 0px;
 }
 
-@media(max-width: 680px){
-  .card-container-prescricao{
+@media (max-width: 680px) {
+  .card-container-prescricao {
     width: 90%;
     padding: 5%;
   }
 }
 
-@media(max-width: 500px){
-  .generated-by-array>.two-column,
-.card-container-prescricao>.two-column{
-  display: block;
-  width: 100%;
+@media (max-width: 500px) {
+
+  .card-container-prescricao > .two-column {
+    display: block;
+    width: 100%;
+  }
+
+  .two-column > .width-100 > input {
+    width: 95%;
+  }
 }
 
-.two-column>.width-100>input{
-  width: 95%;
+
+.add-remove-button{
+  position: absolute;
+  right: 16px;
+  height: 50px;
+  z-index: 99999;
+  background-color: #e9ecef;
+  border-radius: 10px;
+  padding: 5px;
 }
+
+.add-remove-button:hover{
+  font-weight: 800 !important;
 }
