@@ -105,15 +105,6 @@ const Intervencaos = (props) => {
           </div>
         );
       })}
-      {readOnly ? null : (
-        <a
-          data-index={index}
-          className="add-insert-button mt-4 micro-btn micro-btn-hover"
-          onClick={props.onAdicionarIntervencao}
-        >
-          Criar nova intervenção
-        </a>
-      )}
     </div>
   );
 };

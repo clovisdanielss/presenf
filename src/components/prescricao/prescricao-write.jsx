@@ -3,8 +3,32 @@ import voltarIcon from "../../public/voltar.svg";
 import saveIcon from "../../public/save.svg";
 import { Link } from "react-router-dom";
 import Diagnostico from "./diagnostico.jsx";
+import { set } from "lodash";
 
 const PrescricaoWrite = (props) => {
+  let [selected, setSelected] = React.useState(0);
+
+  const onChangeDiagnostico = (e) => {
+    let inc = e.currentTarget.getAttribute("data-increment") == "+1" ? 1 : -1;
+    let value = parseInt(e.currentTarget.getAttribute("data-index")) + inc;
+    if (value >= props.state.diagnosticos.length) {
+      setSelected(0);
+      return;
+    }
+    if (value < 0) {
+      setSelected(props.state.diagnosticos.length - 1);
+      return;
+    }
+    setSelected(value);
+    console.log(selected);
+  };
+
+  const onAdicionarDiagnostico = (e) => {
+    let eCpy = { target: e.target, currentTarget: e.currentTarget };
+    props.onAdicionarDiagnostico(eCpy);
+    setSelected(props.state.diagnosticos.length - 1);
+  };
+
   return (
     <form className="card col-md-6  ml-auto mr-auto mt-5 p-3">
       <h2>Criar Prescricao</h2>
@@ -49,7 +73,9 @@ const PrescricaoWrite = (props) => {
             key={key}
             reactKey={key}
             index={index}
+            selected={selected == index}
             diagnostico={diagnostico}
+            onChangeDiagnostico={onChangeDiagnostico}
             onRemoveDiagnostico={props.onRemoveDiagnostico}
             onOpenModal={props.onOpenModal}
             onChangeValue={props.onChangeValue}
@@ -61,10 +87,14 @@ const PrescricaoWrite = (props) => {
       <div className="row text-left mt-4">
         <div className="col-md-12 text-left">
           <label htmlFor="observacao">Observação: </label>
-          <textarea className="form-control" onChange={props.onChangeValue} id="observacao" />
+          <textarea
+            className="form-control"
+            onChange={props.onChangeValue}
+            id="observacao"
+          />
         </div>
       </div>
-      <a className="add-insert-button" onClick={props.onAdicionarDiagnostico}>
+      <a className="add-insert-button" onClick={onAdicionarDiagnostico}>
         Criar novo diagnóstico
       </a>
       <div className="prescricao-icons">

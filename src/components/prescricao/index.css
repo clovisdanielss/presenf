@@ -74,7 +74,7 @@
 
 .add-remove-button{
   position: absolute;
-  right: 16px;
+  right: 0px;
   height: 50px;
   z-index: 99999;
   background-color: #e9ecef;
@@ -84,4 +84,20 @@
 
 .add-remove-button:hover{
   font-weight: 800 !important;
+}
+
+.generated-by-array{
+  position: relative;
+}
+
+.abs-rt-0{
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+.abs-lt-0{
+  position: absolute;
+  left: 0px;
+  top: 5px;
 }

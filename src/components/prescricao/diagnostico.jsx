@@ -1,4 +1,5 @@
 import React from "react";
+import voltarIcon from "../../public/voltar.svg";
 import Intervencaos from "./intervencaos.jsx";
 
 const Diagnostico = (props) => {
@@ -11,8 +12,40 @@ const Diagnostico = (props) => {
     index = key;
   }
   return (
-    <div key={key} data-index={index} className="generated-by-array mt-4">
+    <div
+      key={key}
+      data-index={index}
+      className="generated-by-array mt-4"
+      style={props.selected ? null : { display: "none" }}
+    >
       <h2 className="diagnostico-header">Diagnóstico {key + 1}</h2>
+      <div
+        className="abs-rt-0"
+        onClick={props.onChangeDiagnostico}
+        data-index={index}
+        data-increment="+1"
+      >
+        <img
+          style={{
+            width: "25px",
+            transform: "rotate(180deg)",
+          }}
+          src={voltarIcon}
+        />
+      </div>
+      <div
+        className="abs-lt-0"
+        onClick={props.onChangeDiagnostico}
+        data-index={index}
+        data-increment="-1"
+      >
+        <img
+          style={{
+            width: "25px",
+          }}
+          src={voltarIcon}
+        />
+      </div>
       <hr />
       {readOnly ? null : (
         <a className="add-remove-button" onClick={props.onRemoveDiagnostico}>
@@ -39,6 +72,15 @@ const Diagnostico = (props) => {
         intervencaos={intervencaos}
         readOnly={readOnly}
       />
+      {readOnly ? null : (
+        <a
+          data-index={index}
+          className="add-insert-button mt-4 micro-btn micro-btn-hover"
+          onClick={props.onAdicionarIntervencao}
+        >
+          Criar nova intervenção
+        </a>
+      )}
       <div className="row mt-4">
         <div className="col-md-6 text-left">
           <label htmlFor={"resultado" + index.toString()}>Resultado: </label>
