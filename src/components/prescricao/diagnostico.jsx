@@ -16,36 +16,40 @@ const Diagnostico = (props) => {
       key={key}
       data-index={index}
       className="generated-by-array mt-4"
-      style={props.selected ? null : { display: "none" }}
+      style={readOnly ? null : props.selected ? null : { display: "none" }}
     >
       <h2 className="diagnostico-header">Diagnóstico {key + 1}</h2>
-      <div
-        className="abs-rt-0"
-        onClick={props.onChangeDiagnostico}
-        data-index={index}
-        data-increment="+1"
-      >
-        <img
-          style={{
-            width: "25px",
-            transform: "rotate(180deg)",
-          }}
-          src={voltarIcon}
-        />
-      </div>
-      <div
-        className="abs-lt-0"
-        onClick={props.onChangeDiagnostico}
-        data-index={index}
-        data-increment="-1"
-      >
-        <img
-          style={{
-            width: "25px",
-          }}
-          src={voltarIcon}
-        />
-      </div>
+      {readOnly ? null : (
+        <div>
+          <div
+            className="abs-rt-0"
+            onClick={props.onChangeDiagnostico}
+            data-index={index}
+            data-increment="+1"
+          >
+            <img
+              style={{
+                width: "25px",
+                transform: "rotate(180deg)",
+              }}
+              src={voltarIcon}
+            />
+          </div>
+          <div
+            className="abs-lt-0"
+            onClick={props.onChangeDiagnostico}
+            data-index={index}
+            data-increment="-1"
+          >
+            <img
+              style={{
+                width: "25px",
+              }}
+              src={voltarIcon}
+            />
+          </div>
+        </div>
+      )}
       <hr />
       {readOnly ? null : (
         <a className="add-remove-button" onClick={props.onRemoveDiagnostico}>

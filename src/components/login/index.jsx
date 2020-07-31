@@ -27,7 +27,6 @@ class Login extends Component {
       const response = JSON.parse(xhr.responseText);
       if (xhr.status === 200 && response.coren) {
         this.context({ enfermeiro: response });
-        console.log(response);
         this.setState({ authenticationRecieved: true });
       }
       if (xhr.status === 500 || xhr.status === 401) {
