@@ -94,9 +94,12 @@ const PrescricaoWrite = (props) => {
           />
         </div>
       </div>
-      <a className="add-insert-button" onClick={onAdicionarDiagnostico}>
-        Criar novo diagnóstico
-      </a>
+      <div  onClick={onAdicionarDiagnostico} className="add-insert-button mt-4 micro-btn micro-btn-hover btn btn-primary">
+        <span  >
+          Criar novo diagnóstico
+        </span>
+      </div>
+
       <div className="prescricao-icons">
         <div>
           <figcaption htmlFor="voltar">Voltar:</figcaption>

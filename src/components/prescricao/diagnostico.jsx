@@ -77,13 +77,11 @@ const Diagnostico = (props) => {
         readOnly={readOnly}
       />
       {readOnly ? null : (
-        <a
-          data-index={index}
-          className="add-insert-button mt-4 micro-btn micro-btn-hover"
-          onClick={props.onAdicionarIntervencao}
-        >
-          Criar nova intervenção
-        </a>
+        <div className="add-insert-button mt-4 micro-btn micro-btn-hover btn btn-primary" data-index={index} onClick={props.onAdicionarIntervencao}>
+          <span>
+            Criar nova intervenção
+          </span>
+        </div>
       )}
       <div className="row mt-4">
         <div className="col-md-6 text-left">

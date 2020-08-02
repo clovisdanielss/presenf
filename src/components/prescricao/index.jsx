@@ -156,7 +156,7 @@ class Prescricao extends Component {
 
   // Método para adicionar campo de intervenção.
   onAdicionarIntervencao(e) {
-    var index = e.target.getAttribute("data-index").replace(/\D/g, "");
+    var index = e.currentTarget.getAttribute("data-index").replace(/\D/g, "");
     let diagnosticos = [];
     let intervencaosIndexes = this.state.intervencaosIndexes;
     index = parseInt(index);
