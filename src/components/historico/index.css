@@ -9,7 +9,7 @@
 }
 .card-container-table>div>.width-100{
   display: block;
-  padding: 20px 20px 0px 20px;
+  padding: 10px;
 }
 .card-container-table>div>.width-100>input{
   width: 300px;

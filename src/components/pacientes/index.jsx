@@ -59,13 +59,29 @@ class Pacientes extends Component {
         <div className="card-container card-container-table">
           <h2>Pacientes</h2>
           <hr />
-          <div className="width-100">
-            <label htmlFor="search-bar">Busca:</label>
-            <input
-              id="search-bar"
-              type="input"
-              onChange={this.onTableSearchUpdate}
-            />
+          <div className="flex-center" style={{
+            justifyContent:"end",
+          }}>
+            
+            <div
+              className="col-md-4"
+              style={{
+                padding:"10px",
+               
+              }}
+            >
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">Busca:</span>
+                </div>
+                <input
+                  id="search-bar"
+                  type="input"
+                  className="form-control"
+                  onChange={this.onTableSearchUpdate}
+                />
+              </div>
+            </div>
           </div>
           <hr />
           <div className="wrapper">

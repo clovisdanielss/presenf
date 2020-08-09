@@ -156,21 +156,26 @@ class ModalComponent extends Component {
         <div className="card-container card-container-table">
           <h2>Criar {this.state.query.name}</h2>
           <hr />
-          <div>
+          <div className="flex-center">
             <div className="width-100 img-input">
               <a onClick={this.onCloseModal}>
-                <img className="voltar-pequeno" src={voltarIcon} />
+                <img src={voltarIcon} className="voltar-pequeno" />
                 <label>Voltar</label>
               </a>
             </div>
             {this.state.customize ? null : (
-              <div className="width-100">
-                <label htmlFor="search-bar">Busca:</label>
-                <input
-                  id="search-bar"
-                  type="input"
-                  onChange={this.onTableSearchUpdate}
-                />
+              <div className="col-md-4">
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">Busca:</span>
+                  </div>
+                  <input
+                    id="search-bar"
+                    type="input"
+                    className="form-control"
+                    onChange={this.onTableSearchUpdate}
+                  />
+                </div>
               </div>
             )}
           </div>

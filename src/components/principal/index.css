@@ -171,6 +171,11 @@ label {
   justify-content: space-between;
 }
 
+.flex-center{
+  display:flex;
+  align-items: center;
+}
+
 .button-link {
   width: 100%;
   height: 40px;

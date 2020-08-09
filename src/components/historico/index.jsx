@@ -15,7 +15,7 @@ class Historico extends Component {
       prescricao: false,
       search: "",
     };
-    this.tableSearchUpdate = this.tableSearchUpdate.bind(this);
+    this.onTableSearchUpdate = this.onTableSearchUpdate.bind(this);
     this.loadHistorico = this.loadHistorico.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
@@ -52,7 +52,7 @@ class Historico extends Component {
     this.loadHistorico();
   }
 
-  tableSearchUpdate(event) {
+  onTableSearchUpdate(event) {
     this.setState({ search: event.target.value });
   }
 
@@ -75,7 +75,7 @@ class Historico extends Component {
         <div className="card-container card-container-table">
           <h2>Histórico de Prescrição</h2>
           <hr />
-          <div>
+          <div className="flex-center">
             <div className="width-100 img-input">
               <Link
                 to={() => {
@@ -87,13 +87,20 @@ class Historico extends Component {
                 <label>Voltar</label>
               </Link>
             </div>
-            <div className="width-100">
-              <label htmlFor="search-bar">Busca:</label>
-              <input
-                id="search-bar"
-                type="input"
-                onChange={this.tableSearchUpdate}
-              />
+            <div
+              className="col-md-4"
+            >
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">Busca:</span>
+                </div>
+                <input
+                  id="search-bar"
+                  type="input"
+                  className="form-control"
+                  onChange={this.onTableSearchUpdate}
+                />
+              </div>
             </div>
           </div>
           <hr />
