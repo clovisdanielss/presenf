@@ -211,7 +211,7 @@ class ModalComponent extends Component {
                     }
                   })}
                   {this.state.customize ? null : (
-                    <tr className="tr">
+                    <tr className="tr" onClick={this.onCustomize}>
                       <td>{message}</td>
                     </tr>
                   )}
